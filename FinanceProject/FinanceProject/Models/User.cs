@@ -3,8 +3,8 @@
 
 namespace FinanceProject.Models
 {
-    public class User : IdentityBuilder<Guid>
+    public class User : IdentityUser<Guid>
     {
-
+          
     }
 }

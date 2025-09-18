@@ -1,5 +1,6 @@
 using FinanceProject.Data;
 using FinanceProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceProject
@@ -12,6 +13,16 @@ namespace FinanceProject
 
             builder.Services.AddDbContext<FinancesDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddIdentity<User, IdentityRole<Guid>>()
+                    .AddEntityFrameworkStores<FinancesDbContext>()
+                    .AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
