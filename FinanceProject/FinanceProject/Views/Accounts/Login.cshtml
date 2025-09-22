@@ -1,0 +1,38 @@
+﻿@model LoginViewmodel
+
+@{
+    ViewBag.Title = "User Login";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <H1>Login in to your account plz</H1>
+        <hr />
+
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asl-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+            </div>
+
+          @*   Later will add a checkbox for remember me but that'll be later *@
+
+
+
+            <button type="submit" class="btn-primary">Login</button>
+
+        </Form>
+    </div>
+</div>
+
