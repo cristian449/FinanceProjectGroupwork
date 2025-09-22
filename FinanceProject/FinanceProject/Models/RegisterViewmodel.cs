@@ -11,7 +11,8 @@ namespace FinanceProject.Models
         [Required]
         public string PhoneNumber { get; set; }
         [Required]
-        public string DateOfBirth { get; set; } //For now leavin it as string may change to Datetime later
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; } 
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -19,5 +20,10 @@ namespace FinanceProject.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Confirmpassword { get; set; }
     }
 }

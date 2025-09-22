@@ -3,6 +3,7 @@
 	ViewBag.Title = "User Register";
 }
 
+
 <H1>Create an account for your finance app BOII</H1>
 
 <div class="row">
@@ -49,9 +50,15 @@
 				<span asp-validation-for="Password" class="text-danger"></span>
 			</div>
 
+			<div class="form-group">
+				<label asp-for="Confirmpassword"></label>
+				<input asp-for="Confirmpassword" type="password" class="form-control"></input>
+				<span asp-validation-for="Confirmpassword" class="text-danger"></span>
+			</div>
 
 
-			<button type="submit" class="btn-outline-primary">Register</button>
+
+			<button type="submit" class="btn-primary">Register</button>
 
 		</form>
 
