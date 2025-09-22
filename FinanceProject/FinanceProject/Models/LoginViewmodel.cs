@@ -14,7 +14,9 @@ namespace FinanceProject.Models
         public string Password { get; set; }
 
 
-        // Add a way later for the user to be remember for easier login
+
+        [Display(Name = "Remember me")]
+        public bool RememberMe { get; set; }
 
     }
 }

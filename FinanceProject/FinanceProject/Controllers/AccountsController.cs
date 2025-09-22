@@ -63,13 +63,10 @@ namespace FinanceProject.Controllers
             if (ModelState.IsValid)
             {
 
-                // For now have to make SignInManger like this as i dont have the rememberme parameter set up yet so i found online that i can use PasswordSignInAsync like
-                // This to temporarly fix it like this
-
                 var result = await _signInManager.PasswordSignInAsync(
                     model.Email,
                     model.Password,
-                    isPersistent: false,
+                    model.RememberMe,
                     lockoutOnFailure: false
                 );
 
