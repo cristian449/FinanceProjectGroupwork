@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <label asp-for="Email"></label>
-                <input asl-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
@@ -26,7 +26,13 @@
 
             </div>
 
-          @*   Later will add a checkbox for remember me but that'll be later *@
+           <div class="form-group">
+                <div class="form-check">
+                    <input asp-for="RememberMe" class="form-check-input" type="checkbox" />
+                    <label asp-for="RememberMe" class="form-check-label"></label>
+                </div>
+                <span asp-validation-for="RememberMe" class="text-danger"></span>
+            </div>
 
 
 
