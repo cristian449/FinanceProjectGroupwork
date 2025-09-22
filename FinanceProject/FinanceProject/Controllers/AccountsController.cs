@@ -1,5 +1,4 @@
 ﻿using FinanceProject.Models;
-using FinanceProject.Viewmodels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -88,7 +87,7 @@ namespace FinanceProject.Controllers
     
 
 
-    public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
