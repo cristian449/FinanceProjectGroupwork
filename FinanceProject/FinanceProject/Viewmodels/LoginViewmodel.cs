@@ -13,5 +13,8 @@ namespace FinanceProject.Viewmodels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+
+        // Add a way later for the user to be remember for easier login
+
     }
 }
