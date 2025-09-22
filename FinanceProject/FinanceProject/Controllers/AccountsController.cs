@@ -29,7 +29,13 @@ namespace FinanceProject.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var user = new User { UserName = model.Email, Email = model.Email };
+                    if (model.Password != model.Confirmpassword)
+                    {
+                        ModelState.AddModelError("Confirmpassword", "Passwords do not match.");
+                        return View(model);
+                    }
+
+                var user = new User { UserName = model.Email, Email = model.Email };
                     var result = await _userManager.CreateAsync(user, model.Password);
 
                     if (result.Succeeded)
