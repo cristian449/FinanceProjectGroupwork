@@ -38,7 +38,7 @@
                         @Html.DisplayFor(i => item.InvoiceDate)
                     </td>
                     <td>
-                        <a asp-action="Details">More Details</a>
+                        <a asp-action="Details" asp-route-id="@item.InvoiceID">More Details</a>
                     </td>
                 </tr>
             }

@@ -20,9 +20,22 @@ namespace FinanceProject.Controllers
             return View(invoices);
         }
 
-        public IActionResult Details()
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var invoice = await _context.Invoices.FirstOrDefaultAsync(
+                i => i.InvoiceID == id);
+
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            return View(invoice);
         }
     }
 }

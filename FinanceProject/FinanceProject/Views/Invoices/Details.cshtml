@@ -1,4 +1,5 @@
-﻿@{
+﻿@model FinanceProject.Models.Invoice
+@{
     ViewData["Title"] = "Details";
 }
 
@@ -9,4 +10,36 @@
 <div>
     <h1>Invoices</h1>
     <a asp-action="Index">Back</a>
+
+    <hr>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(Model => Model.Header)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayFor(Model => Model.Header)
+        </dt>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(Model => Model.Description)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayFor(Model => Model.Description)
+        </dt>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(Model => Model.Amount)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayFor(Model => Model.Amount)€
+        </dt>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(Model => Model.InvoiceDate)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayFor(Model => Model.InvoiceDate)
+        </dt>
+    </dl>
 </div>
