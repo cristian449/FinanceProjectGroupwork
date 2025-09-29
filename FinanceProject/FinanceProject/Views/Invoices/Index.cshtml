@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<FinanceProject.Models.Invoice>
+@{
     ViewData["Title"] = "Transaction history";
 }
 
@@ -9,44 +10,38 @@
 <div>
     <h1>Invoices</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>
-                    Test
+                    @Html.DisplayNameFor(Model => Model.Header)
                 </th>
                 <th>
-                    Test
+                    @Html.DisplayNameFor(Model => Model.Amount)
                 </th>
                 <th>
-                    Test
-                </th>
-                <th>
-                    Test
-                </th>
-                <th>
-                    Test
+                    @Html.DisplayNameFor(Model => Model.InvoiceDate)
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    Test
-                </td>
-                <td>
-                    Test
-                </td>
-                <td>
-                    Test
-                </td>
-                <td>
-                    Test
-                </td>
-                <td>
-                    <a asp-action="Details">Details</a>
-                </td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(i => item.Header)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Amount)€
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.InvoiceDate)
+                    </td>
+                    <td>
+                        <a asp-action="Details">More Details</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
