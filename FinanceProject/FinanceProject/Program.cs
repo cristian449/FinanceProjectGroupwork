@@ -25,6 +25,7 @@ namespace FinanceProject
 
                 var context = services.GetRequiredService<FinancesDbContext>();
                 context.Database.EnsureCreated();
+                DbInitializer.Initialize(context);
             }
 
             // Configure the HTTP request pipeline.
