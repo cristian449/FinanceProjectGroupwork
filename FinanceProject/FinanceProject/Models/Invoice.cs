@@ -2,7 +2,7 @@
 
 namespace FinanceProject.Models
 {
-    public class Invoice // võime ka nimetada üle transaction'iks kui tahate
+    public class Invoice
     {
         public int InvoiceID { get; set; }
 
