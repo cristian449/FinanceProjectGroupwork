@@ -8,5 +8,10 @@ namespace FinanceProject.Controllers
         {
             return View();
         }
+
+        public IActionResult Details()
+        {
+            return View();
+        }
     }
 }
