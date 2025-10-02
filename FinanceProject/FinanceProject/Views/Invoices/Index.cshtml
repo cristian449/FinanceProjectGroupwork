@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<FinanceProject.Models.Invoice>
 @{
-    ViewData["Title"] = "Transaction history";
+    ViewData["Title"] = "Invoice history";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Transaction history</h1> <br />
+    <h1 class="display-4">Invoice history</h1> <br />
 </div>
 
 <div>
@@ -22,6 +22,9 @@
                 <th>
                     @Html.DisplayNameFor(Model => Model.InvoiceDate)
                 </th>
+                <th>
+                    Details
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +32,12 @@
             {
                 <tr>
                     <td>
+                        <button class="collapseButton">▼</button>
                         @Html.DisplayFor(i => item.Header)
+
+                        <div class="hiddenContent" style="display: none">
+                            @Html.DisplayFor(i => item.Description)
+                        </div>
                     </td>
                     <td>
                         @Html.DisplayFor(i => item.Amount)€
@@ -45,3 +53,23 @@
         </tbody>
     </table>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".collapseButton").forEach(button => {
+                button.addEventListener("click", () => {
+                    const target = button.parentElement.querySelector(".hiddenContent");
+
+                    if (target.style.display == "none") {
+                        target.style.display = "block";
+                        button.textContent = "▲";
+                    } else {
+                        target.style.display = "none";
+                        button.textContent = "▼";
+                    }
+                });
+            });
+        });
+    </script>
+}
