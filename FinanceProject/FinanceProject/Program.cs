@@ -58,6 +58,7 @@ namespace FinanceProject
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            
             app.Run();
         }
     }

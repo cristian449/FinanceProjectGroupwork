@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinanceProject.Controllers
 {
 
-    //Might change Controller name later dependant on if any teammates use the same name
+    //Might change Controller name later dependant on if any of my teammates use the same name
     public class AccountsController : Controller
     {
 
@@ -95,5 +95,13 @@ namespace FinanceProject.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+
+        public async Task<IActionResult> Back()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }
