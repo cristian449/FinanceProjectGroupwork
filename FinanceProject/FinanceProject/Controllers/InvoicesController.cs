@@ -37,5 +37,18 @@ namespace FinanceProject.Controllers
 
             return View(invoice);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            var invoices = await _context.Invoices.ToListAsync();
+            return View(invoices);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create()
+        //{
+        //    var invoices = await _context.Invoices.ToListAsync();
+        //    return View(invoices);
+        //}
     }
 }

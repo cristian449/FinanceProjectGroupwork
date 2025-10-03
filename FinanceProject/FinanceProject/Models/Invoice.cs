@@ -2,6 +2,11 @@
 
 namespace FinanceProject.Models
 {
+    public enum InvoiceCategories
+    {
+        Food, Groceries, idk, creature, MISC
+    }
+
     public class Invoice
     {
         public int InvoiceID { get; set; }
@@ -11,6 +16,7 @@ namespace FinanceProject.Models
         [StringLength(200)]
         public string Description { get; set; }
         public float Amount { get; set; } // money
+        public InvoiceCategories InvoiceCategory { get; set; }
         public DateTime InvoiceDate { get; set; }
 
     }

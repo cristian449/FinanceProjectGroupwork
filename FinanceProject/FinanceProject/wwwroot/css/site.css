@@ -24,10 +24,11 @@ body {
 .collapseButton {
     height: 20px;
     width: 20px;
-    color: white;
-    background-color: #777;
-    border-radius: 5px;
-    border: outset, 2px, black;
+    color: black;
+    /* background-color: #777;
+    border-radius: 5px;*/
+    background-color: transparent;
+    /*border: outset, 2px, black;*/
     padding: 0px;
     line-height: 0px;
     font-size: 15px;
@@ -39,7 +40,27 @@ body {
 
 .hiddenContent {
     border: 1px, black, solid;
-    background-color: lightgray;
-    display: none;
+    background-color: #FAF9F6;
     margin-top: 5px;
+}
+
+.invoiceForm {
+    border: 1px, black, solid;
+    background-color: #FAF9F6;
+    padding: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: left;
+}
+
+.invoiceInput {
+    outline: 1px dashed black;
+    border: 0;
+    resize: none;
+}
+
+.inputHolder {
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

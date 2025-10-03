@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FinanceProject.Models.Invoice>
+@{
+    ViewData["Title"] = "Add new invoice";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Invoices</h1> <br>
+
+    <h1 class="display-5" style="font-weight: bold">Add new invoice</h1> <br>
+    <a asp-action="Index">Go Back</a>
+    <form asp-action="Index" class="invoiceForm">
+
+        <div class="inputHolder">
+            <label for="header" class="invoiceInputLabel">Title: </label><br>
+            <textarea name="header" class="invoiceInput" id="invoiceHeaderInput" maxlength="50" rows="1" cols="50"></textarea><br>
+        </div>
+
+        <div class="inputHolder">
+            <label for="invoiceDescriptionInput" class="invoiceInputLabel">Description: </label><br>
+            <textarea name="description" class="invoiceInput" id="invoiceDescriptionInput" maxlength="200" rows="4" cols="50"></textarea><br>
+        </div>
+
+        <div class="inputHolder">
+            <label for="amount" class="invoiceInputLabel">Amount [€]: </label><br>
+            <textarea name="amount" class="invoiceInput" id="invoiceAmountInput" rows="1"></textarea><br>
+        </div>
+
+        <div class="inputHolder">
+            <label for="invoiceCategory" class="invoiceInputLabel">Category: </label><br>
+            <select id="invoiceCategory">
+                <option value="" disabled selected>--Select--</option>
+                @foreach (var category in Enum.GetValues(typeof(InvoiceCategories)))
+                {
+                    <option value="@category">@category</option>
+                }
+            </select>
+            <input type="submit" name="submitButton" value="Submit" />
+        </div>
+    </form>
+</div>
