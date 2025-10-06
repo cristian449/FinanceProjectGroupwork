@@ -1,4 +1,5 @@
 ﻿using FinanceProject.Data;
+using FinanceProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -40,15 +41,27 @@ namespace FinanceProject.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var invoices = await _context.Invoices.ToListAsync();
-            return View(invoices);
+            return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create()
-        //{
-        //    var invoices = await _context.Invoices.ToListAsync();
-        //    return View(invoices);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Header, Description, Amount, InvoiceDate, InvoiceCategory")] Invoice invoice)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(invoice);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save changes, try again");
+            }
+
+            return View(invoice);
+        }
     }
 }

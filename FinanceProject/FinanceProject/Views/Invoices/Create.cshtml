@@ -1,6 +1,6 @@
-﻿@model IEnumerable<FinanceProject.Models.Invoice>
+﻿@model FinanceProject.Models.Invoice
 @{
-    ViewData["Title"] = "Add new invoice";
+    ViewData["Title"] = "Create";
 }
 
 <div class="text-center">
@@ -8,26 +8,37 @@
 
     <h1 class="display-5" style="font-weight: bold">Add new invoice</h1> <br>
     <a asp-action="Index">Go Back</a>
-    <form asp-action="Index" class="invoiceForm">
+    <form asp-action="Create" class="invoiceForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="inputHolder">
-            <label for="header" class="invoiceInputLabel">Title: </label><br>
-            <textarea name="header" class="invoiceInput" id="invoiceHeaderInput" maxlength="50" rows="1" cols="50"></textarea><br>
+            <label asp-for="Header" class="invoiceInputLabel">Title: </label><br>
+            <textarea asp-for="Header" class="invoiceInput" id="invoiceHeaderInput" maxlength="50" rows="1" cols="50"></textarea><br>
+            <span asp-validation-for="Header" class="text-danger"></span>
         </div>
 
         <div class="inputHolder">
-            <label for="invoiceDescriptionInput" class="invoiceInputLabel">Description: </label><br>
-            <textarea name="description" class="invoiceInput" id="invoiceDescriptionInput" maxlength="200" rows="4" cols="50"></textarea><br>
+            <label asp-for="Description" class="invoiceInputLabel">Description: </label><br>
+            <textarea asp-for="Description" class="invoiceInput" id="invoiceDescriptionInput" maxlength="200" rows="4" cols="50"></textarea><br>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <div class="inputHolder">
-            <label for="amount" class="invoiceInputLabel">Amount [€]: </label><br>
-            <textarea name="amount" class="invoiceInput" id="invoiceAmountInput" rows="1"></textarea><br>
+            <label asp-for="Amount" class="invoiceInputLabel">Amount [€]: </label><br>
+            <textarea asp-for="Amount" class="invoiceInput" id="invoiceAmountInput" rows="1"></textarea><br>
+            <span asp-validation-for="Amount" class="text-danger"></span>
         </div>
 
         <div class="inputHolder">
-            <label for="invoiceCategory" class="invoiceInputLabel">Category: </label><br>
-            <select id="invoiceCategory">
+            <label asp-for="InvoiceDate" class="invoiceInputLabel">Invoice time: </label><br>
+            <input type="date" asp-for="InvoiceDate" class="invoiceInput" value="@DateTime.Now" />
+            <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+        </div>
+
+        <div class="inputHolder">
+            <label asp-for="InvoiceCategory" class="invoiceInputLabel">Category: </label><br>
+            <span asp-validation-for="InvoiceCategory" class="text-danger"></span>
+            <select asp-for="InvoiceCategory" id="invoiceCategory">
                 <option value="" disabled selected>--Select--</option>
                 @foreach (var category in Enum.GetValues(typeof(InvoiceCategories)))
                 {
