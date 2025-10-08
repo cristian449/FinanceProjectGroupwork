@@ -39,6 +39,9 @@ body {
     border: 1px, black, solid;
     background-color: #FAF9F6;
     margin-top: 5px;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .invoiceForm {
@@ -84,4 +87,10 @@ body {
     color: black;
     background-color: white;
     overflow: hidden;
+}
+
+#deleteButton {
+    float: right;
+    background-color: red;
+    color: white;
 }

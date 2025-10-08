@@ -6,8 +6,10 @@
 <div class="text-center">
     <h1 class="display-4">Invoices</h1> <br>
 
-    <h1 class="display-5" style="font-weight: bold">Add new invoice</h1> <br>
-    <a asp-action="Create">Add new invoice</a>
+    <div style="outline: solid, black, 1px">
+        <h1 class="display-5" style="font-weight: bold">Add new invoice</h1> <br>
+        <a asp-action="Create">✎ Add new invoice</a>
+    </div>
 </div>
 
 <div>
@@ -37,7 +39,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="width: 25%; max-width: 25%">
                         <button class="collapseButton">▼</button>
                         @Html.DisplayFor(i => item.Header)
 
