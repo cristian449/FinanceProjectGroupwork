@@ -45,7 +45,7 @@ namespace FinanceProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Header, Description, Amount, InvoiceDate, InvoiceCategory")] Invoice invoice)
+        public async Task<IActionResult> Create([Bind("Header, Description, Amount, InvoiceCategory")] Invoice invoice)
         {
             try
             {

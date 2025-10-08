@@ -61,3 +61,27 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+.invoiceDetailsHolder {
+    border: 1px, black, solid;
+    background-color: #FAF9F6;
+    padding: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: left;
+}
+
+.invoiceDetailHolder {
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.invoiceDetailValue {
+    outline: 1px solid black;
+    border: 0;
+    resize: none;
+    color: black;
+    background-color: white;
+    overflow: hidden;
+}
