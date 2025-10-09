@@ -1,3 +1,30 @@
-﻿﻿@{
+﻿@model RegisterViewmodel
+
+@* this might get ugly 
+    i should probably ask whether or not this be sacrilege
+*@
+
+﻿@{
     ViewData["Title"] = "Dashboard";
 }
+
+<h1>Dashboard</h1>
+
+<h3>Hi, @Model.FirstName !</h3>
+<div>
+    <h4>H4</h4>
+    <p>
+        mario: "oh boy these old tunnels sure look dangerous, i best find the metal cap"
+        <br />
+        <br />
+        the nefarious scuttlebug:<br />
+        @Model.Email
+    </p>
+</div>
+<div>
+    <h4>H4</h4>
+    <p>
+        CAN'T YOU TELL THIS IS PLACEHOLDER TEXT??????:<br />
+        @Model.DateOfBirth
+    </p>
+</div>
