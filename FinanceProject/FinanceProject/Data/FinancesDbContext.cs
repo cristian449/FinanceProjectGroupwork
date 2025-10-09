@@ -8,11 +8,8 @@ namespace FinanceProject.Data
     public class FinancesDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public FinancesDbContext(DbContextOptions<FinancesDbContext> options)
-        : base(options) { }
+            : base(options) { }
 
-        public FinancesDbContext(DbContextOptions<FinancesDbContext> options) 
-            : base(options) {}
+        public DbSet<Invoice> Invoices { get; set; }
     }
-
-    
 }
