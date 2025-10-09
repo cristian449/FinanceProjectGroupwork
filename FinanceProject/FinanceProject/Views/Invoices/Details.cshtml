@@ -1,0 +1,38 @@
+﻿@model FinanceProject.Models.Invoice
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Invoices</h1> <br>
+
+    <h1 class="display-5" style="font-weight: bold">@Model.Header</h1> <br>
+    <a asp-action="Index">Back to invoices</a>
+
+    <div class="invoiceDetailsHolder">
+        <div class="invoiceDetailHolder">
+            <label>@Html.DisplayNameFor(Model => Model.Header):</label><br>
+            <textarea disabled class="invoiceDetailValue" rows="1" cols="50">@Html.DisplayFor(Model => Model.Header)</textarea>
+        </div>
+
+        <div class="invoiceDetailHolder">
+            <label>@Html.DisplayNameFor(Model => Model.Description):</label><br>
+            <textarea disabled class="invoiceDetailValue" rows="4" cols="50">@Html.DisplayFor(Model => Model.Description)</textarea>
+        </div>
+
+        <div class="invoiceDetailHolder">
+            <label>@Html.DisplayNameFor(Model => Model.Amount):</label><br>
+            <textarea disabled class="invoiceDetailValue" rows="1">@Html.DisplayFor(Model => Model.Amount)€</textarea>
+        </div>
+
+        <div class="invoiceDetailHolder">
+            <label>@Html.DisplayNameFor(Model => Model.InvoiceCategory):</label><br>
+            <textarea disabled class="invoiceDetailValue" rows="1">@Html.DisplayFor(Model => Model.InvoiceCategory)</textarea>
+        </div>
+
+        <div class="invoiceDetailHolder">
+            <label>@Html.DisplayNameFor(Model => Model.InvoiceDate):</label><br>
+            <textarea disabled class="invoiceDetailValue" rows="1">@Html.DisplayFor(Model => Model.InvoiceDate)</textarea>
+        </div>
+    </div>
+</div>

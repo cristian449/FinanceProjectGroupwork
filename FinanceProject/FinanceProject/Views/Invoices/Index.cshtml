@@ -1,0 +1,85 @@
+﻿@model IEnumerable<FinanceProject.Models.Invoice>
+@{
+    ViewData["Title"] = "Invoice history";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Invoices</h1> <br>
+
+    <h1 class="display-5" style="font-weight: bold">Add new invoice</h1> <br>
+    <a asp-action="Create">Add new invoice</a>
+</div>
+
+<div>
+    <h1>Invoice history</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.Header)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.InvoiceCategory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.InvoiceDate)
+                </th>
+                <th>
+                    Details
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <button class="collapseButton">▼</button>
+                        @Html.DisplayFor(i => item.Header)
+
+                        <div class="hiddenContent" style="display: none">
+                            <label style="font-weight: bold">Description</label><br>
+                            @Html.DisplayFor(i => item.Description)
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Amount)€
+                    </td>
+                    <th>
+                        @Html.DisplayFor(Model => item.InvoiceCategory)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(i => item.InvoiceDate)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.InvoiceID">More Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".collapseButton").forEach(button => {
+                button.addEventListener("click", () => {
+                    const target = button.parentElement.querySelector(".hiddenContent");
+
+                    if (target.style.display == "none") {
+                        target.style.display = "block";
+                        button.textContent = "▲";
+                    } else {
+                        target.style.display = "none";
+                        button.textContent = "▼";
+                    }
+                });
+            });
+        });
+    </script>
+}

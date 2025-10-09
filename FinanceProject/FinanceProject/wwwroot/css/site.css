@@ -18,6 +18,7 @@ html {
 }
 
 body {
+
     margin-bottom: 60px;
 }
 
@@ -25,3 +26,68 @@ footer[class='border-top footer text-muted'] {
     color: azure;
 }
 
+
+.collapseButton {
+    height: 20px;
+    width: 20px;
+    color: black;
+    background-color: transparent;
+    padding: 0px;
+    line-height: 0px;
+    font-size: 15px;
+}
+
+.collapseButton:hover {
+    background-color: #999;
+}
+
+.hiddenContent {
+    border: 1px, black, solid;
+    background-color: #FAF9F6;
+    margin-top: 5px;
+}
+
+.invoiceForm {
+    border: 1px, black, solid;
+    background-color: #FAF9F6;
+    padding: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: left;
+}
+
+.invoiceInput {
+    outline: 1px dashed black;
+    border: 0;
+    resize: none;
+}
+
+.inputHolder {
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.invoiceDetailsHolder {
+    border: 1px, black, solid;
+    background-color: #FAF9F6;
+    padding: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: left;
+}
+
+.invoiceDetailHolder {
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.invoiceDetailValue {
+    outline: 1px solid black;
+    border: 0;
+    resize: none;
+    color: black;
+    background-color: white;
+    overflow: hidden;
+}
