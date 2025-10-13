@@ -7,9 +7,6 @@ namespace FinanceProject.Controllers
 {
     public class UserController : Controller
     {
-        //i'll look into how [Authorize] would work in this file, exactly
-        //i want to prevent users that aren't logged in from accessing the dashboard through the url
-        //if i've done this before then i forgot, i'm sorry
         private readonly UserManager<User> _userManager;
 
         public UserController(UserManager<User> userManager)
@@ -30,6 +27,7 @@ namespace FinanceProject.Controllers
                 FirstName = user.FirstName,
                 Email = user.Email,
                 DateOfBirth = user.DateOfBirth,
+                PhoneNumber = user.PhoneNumber
             };
 
             return View("~/Views/Accounts/Dashboard.cshtml", model);

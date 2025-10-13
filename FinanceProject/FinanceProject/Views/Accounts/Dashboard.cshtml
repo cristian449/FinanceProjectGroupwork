@@ -1,29 +1,54 @@
 ﻿@model User
 
-@* this might get ugly 
-*@
-
 ﻿@{
     ViewData["Title"] = "Dashboard";
 }
 
-<h1>Dashboard</h1>
+<h1>Hi, <b>@Model.FirstName</b>!</h1>
 
-<h3>Hi, @Model.FirstName!</h3>
+<h3>Your info</h3>
 <div>
-    <h4>H4</h4>
-    <p>
-        mario: "oh boy these old tunnels sure look dangerous, i best find the metal cap"
-        <br />
-        <br />
-        the nefarious scuttlebug:<br />
-        @Model.Email
-    </p>
+    <h5>DOB</h5>
+    <p>@Model.DateOfBirth</p>
 </div>
 <div>
-    <h4>H4</h4>
-    <p>
-        CAN'T YOU TELL THIS IS PLACEHOLDER TEXT??????:<br />
-        @Model.DateOfBirth
-    </p>
+    <button class="accordion">Click to reveal your email address</button>
+	<div class="panel">
+		<p>@Model.Email</p>
+	</div>
 </div>
+<div>
+    <button class="accordion">Click to reveal your phone number</button>
+    <div class="panel">
+        <p>@Model.PhoneNumber</p>
+    </div>
+</div>
+
+<style>
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+</style>
+
+<script defer>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+</script>
+ 
+        @* this sucks on ice *@

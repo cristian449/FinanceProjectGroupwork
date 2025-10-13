@@ -10,7 +10,6 @@ namespace FinanceProject.Models
 
         public string LastName { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
     }
 }
