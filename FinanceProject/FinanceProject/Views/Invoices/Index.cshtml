@@ -49,7 +49,14 @@
                         </div>
                     </td>
                     <td>
-                        @Html.DisplayFor(i => item.Amount)€
+                        @if (item.Amount > 0)
+                        {
+                            <span style="color: green; font-weight: bold">@item.Amount.ToString("N2")€</span>
+                        }
+                        else
+                        {
+                            <span style="color: red; font-weight: bold">@item.Amount.ToString("N2")€</span>
+                        }
                     </td>
                     <th>
                         @Html.DisplayFor(Model => item.InvoiceCategory)

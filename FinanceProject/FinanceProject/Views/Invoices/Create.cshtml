@@ -33,7 +33,7 @@
             <label asp-for="InvoiceCategory" class="invoiceInputLabel">Category: </label><br>
             <span asp-validation-for="InvoiceCategory" class="text-danger"></span>
             <select asp-for="InvoiceCategory" id="invoiceCategory">
-                <option value="" enabled selected>@Html.DisplayFor(Model => Model.Header)</option>
+                <option value="" disabled selected>--Select--</option>
                 @foreach (var category in Enum.GetValues(typeof(InvoiceCategories)))
                 {
                     <option value="@category">@category</option>

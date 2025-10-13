@@ -117,7 +117,9 @@ namespace FinanceProject.Controllers
                 return NotFound();
             }
 
-            var invoice = await _context.Invoices.FirstOrDefaultAsync(
+            var invoice = await _context.Invoices
+                .AsNoTracking()
+                .FirstOrDefaultAsync(
                 i => i.InvoiceID == id);
 
             if (invoice == null)
@@ -125,19 +127,35 @@ namespace FinanceProject.Controllers
                 return NotFound();
             }
 
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if problem persists" +
+                    "see your system administrator";
+            }
+
             return View(invoice);
+        }
 
-            //_context.Remove(invoice);
-            //await _context.SaveChangesAsync();
-
-            //if (saveChangesError.GetValueOrDefault())
-            //{
-            //    ViewData["ErrorMessage"] =
-            //        "Delete failed. Try again, and if problem persists" +
-            //        "see your system administrator";
-            //}
-
-            //return RedirectToAction(nameof(Index));
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var invoice = await _context.Invoices.FindAsync(id);
+            if (invoice == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try
+            {
+                _context.Invoices.Remove(invoice);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
     }
 }

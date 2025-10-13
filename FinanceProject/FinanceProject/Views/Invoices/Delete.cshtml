@@ -4,9 +4,8 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4"><span style="color:red; font-weight: bold">Delete </span>@Model.Header</h1> <br>
-
     <h1 class="display-5" style="font-weight: bold; color: red">Are you sure you want to delete this?</h1> <br>
+
     <a asp-action="Index">↩ Back to invoices</a>
 
     <div class="invoiceDetailsHolder">
@@ -34,9 +33,9 @@
         <div class="invoiceDetailHolder">
             <label>@Html.DisplayNameFor(Model => Model.InvoiceDate):</label><br>
             <textarea disabled class="invoiceDetailValue" rows="1">@Html.DisplayFor(Model => Model.InvoiceDate)</textarea>
-            <form>
-                <input asp-action="Delete" asp-route-id="@Model.InvoiceID" id="deleteButton">Delete</input>
-            </form>
         </div>
+        <form asp-action="Delete" method="post">
+            <input type="submit" id="deleteButton" value="DELETE">
+        </form>
     </div>
 </div>
