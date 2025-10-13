@@ -25,14 +25,14 @@ namespace FinanceProject.Controllers
                 return NotFound();
             }
 
-            //var model = new User
-            //{
-            //    FirstName = user.FirstName,
-            //    Email = user.Email,
-            //    DateOfBirth = user.DateOfBirth,
-            //};
+            var model = new User
+            {
+                FirstName = user.FirstName,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth,
+            };
 
-            return View("~/Views/Accounts/Dashboard.cshtml"/*, model*/);
+            return View("~/Views/Accounts/Dashboard.cshtml", model);
         }
     }
 }
