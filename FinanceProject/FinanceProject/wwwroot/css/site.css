@@ -93,4 +93,11 @@ body {
     float: right;
     background-color: red;
     color: white;
+    border: 0;
+    text-decoration: underline;
+    font-size: 32px;
+}
+
+.indexRow:hover {
+    background-color: ghostwhite;
 }

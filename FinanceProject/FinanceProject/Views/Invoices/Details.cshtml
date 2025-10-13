@@ -21,7 +21,14 @@
 
         <div class="invoiceDetailHolder">
             <label>@Html.DisplayNameFor(Model => Model.Amount):</label><br>
-            <textarea disabled class="invoiceDetailValue" rows="1">@Html.DisplayFor(Model => Model.Amount)€</textarea>
+            @if (Model.Amount > 0)
+            {
+                <textarea disabled class="invoiceDetailValue" rows="1" style="color: green; font-weight: bold">+@Html.DisplayFor(Model => Model.Amount)€</textarea>
+            }
+            else
+            {
+                <textarea disabled class="invoiceDetailValue" rows="1" style="color: red; font-weight: bold">@Html.DisplayFor(Model => Model.Amount)€</textarea>
+            }
         </div>
 
         <div class="invoiceDetailHolder">
@@ -32,7 +39,7 @@
         <div class="invoiceDetailHolder">
             <label>@Html.DisplayNameFor(Model => Model.InvoiceDate):</label><br>
             <textarea disabled class="invoiceDetailValue" rows="1">@Html.DisplayFor(Model => Model.InvoiceDate)</textarea>
-            <a asp-action="Delete" asp-route-id="@Model.InvoiceID" id="deleteButton">Delete</a>
         </div>
+        <div><a asp-action="Delete" asp-route-id="@Model.InvoiceID" id="deleteButton">Delete</a></div>
     </div>
 </div>

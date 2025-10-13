@@ -4,14 +4,14 @@ namespace FinanceProject.Models
 {
     public enum InvoiceCategories
     {
-        Food, Groceries, idk, creature, MISC
+        Food, Travel, idk, creature, MISC
     }
 
     public class Invoice
     {
         public int InvoiceID { get; set; }
 
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 2)]
         public string Header { get; set; } // aka title
         [StringLength(200)]
         public string? Description { get; set; }

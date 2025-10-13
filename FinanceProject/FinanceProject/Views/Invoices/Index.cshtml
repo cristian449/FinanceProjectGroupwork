@@ -36,9 +36,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Reverse())
             {
-                <tr>
+                <tr class="indexRow">
                     <td style="width: 25%; max-width: 25%">
                         <button class="collapseButton">▼</button>
                         @Html.DisplayFor(i => item.Header)
@@ -51,7 +51,7 @@
                     <td>
                         @if (item.Amount > 0)
                         {
-                            <span style="color: green; font-weight: bold">@item.Amount.ToString("N2")€</span>
+                            <span style="color: green; font-weight: bold">+@item.Amount.ToString("N2")€</span>
                         }
                         else
                         {

@@ -13,19 +13,19 @@
 
         <div class="inputHolder">
             <label asp-for="Header" class="invoiceInputLabel">Title: </label><br>
-            <textarea asp-for="Header" class="invoiceInput" id="invoiceHeaderInput" maxlength="50" rows="1" cols="50">@Html.DisplayFor(Model => Model.Header)</textarea><br>
+            <textarea asp-for="Header" class="invoiceInput" id="invoiceHeaderInput" maxlength="50" rows="1" cols="50"></textarea><br>
             <span asp-validation-for="Header" class="text-danger"></span>
         </div>
 
         <div class="inputHolder">
             <label asp-for="Description" class="invoiceInputLabel">Description: </label><br>
-            <textarea asp-for="Description" class="invoiceInput" id="invoiceDescriptionInput" maxlength="200" rows="4" cols="50">@Html.DisplayFor(Model => Model.Description)</textarea><br>
+            <textarea asp-for="Description" class="invoiceInput" id="invoiceDescriptionInput" maxlength="200" rows="4" cols="50"></textarea><br>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <div class="inputHolder">
             <label asp-for="Amount" class="invoiceInputLabel">Amount [€]: </label><br>
-            <textarea asp-for="Amount" class="invoiceInput" id="invoiceAmountInput" rows="1">@Html.DisplayFor(Model => Model.Amount)</textarea><br>
+            <textarea asp-for="Amount" class="invoiceInput" id="invoiceAmountInput" rows="1"></textarea><br>
             <span asp-validation-for="Amount" class="text-danger"></span>
         </div>
 
