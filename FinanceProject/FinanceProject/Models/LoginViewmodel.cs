@@ -13,6 +13,8 @@ namespace FinanceProject.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Display(Name = "Admin Key")]
+        public string? AdminKey { get; set; }
 
 
         [Display(Name = "Remember me")]

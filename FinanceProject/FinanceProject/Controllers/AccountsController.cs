@@ -68,7 +68,6 @@ namespace FinanceProject.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var result = await _signInManager.PasswordSignInAsync(
                     model.Email,
                     model.Password,
@@ -76,18 +75,50 @@ namespace FinanceProject.Controllers
                     lockoutOnFailure: false
                 );
 
-
                 if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
+                {
+                    if (!string.IsNullOrEmpty(model.AdminKey))
+                    {
+                        var user = await _userManager.FindByEmailAsync(model.Email);
+                        if (user != null)
+                        {
+                            var claims = await _userManager.GetClaimsAsync(user);
+                            var adminKeyClaim = claims.FirstOrDefault(c => c.Type == "AdminKey");
 
-                ModelState.AddModelError("", "Invalid login attempt");
+                            if (adminKeyClaim != null && adminKeyClaim.Value == model.AdminKey)
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("AdminKey", "Invalid admin key");
+                                await _signInManager.SignOutAsync();
+                                return View(model);
+                            }
+                        }
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("Email", "User not found");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Password", "Invalid password");
+                    }
+                }
             }
 
             return View(model);
         }
-           
-       
-    
+
+
+
 
 
         public async Task<IActionResult> Logout()

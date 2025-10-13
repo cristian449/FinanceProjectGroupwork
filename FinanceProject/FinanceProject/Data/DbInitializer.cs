@@ -1,26 +1,52 @@
 ﻿using FinanceProject.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace FinanceProject.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(FinancesDbContext context) 
+        public static async Task Initialize(FinancesDbContext context, UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager)
         {
-            if (context.Invoices.Any())
+            var adminRoleExists = await roleManager.RoleExistsAsync("Admin");
+            if (!adminRoleExists)
             {
-                return;
+                await roleManager.CreateAsync(new IdentityRole<Guid>("Admin"));
             }
 
-            var Invoices = new Invoice[]
+            if (!context.Invoices.Any())
             {
-                new Invoice {Header="Pancake", Description="Oooooh it was sooo good mmm", Amount=10, InvoiceCategory=InvoiceCategories.Food, InvoiceDate=DateTime.Now},
-                new Invoice {Header="Worm", Description="...", Amount=100, InvoiceCategory=InvoiceCategories.creature, InvoiceDate=DateTime.Now},
-                new Invoice {Header="Big bag", Description="there was stuff in it", Amount=50, InvoiceCategory=InvoiceCategories.MISC, InvoiceDate=DateTime.Now},
-            };
+                var invoices = new Invoice[]
+                {
+                    new Invoice {Header="Pancake", Description="Oooooh it was sooo good mmm", Amount=10, InvoiceCategory=InvoiceCategories.Food, InvoiceDate=DateTime.Now},
+                    new Invoice {Header="Worm", Description="...", Amount=100, InvoiceCategory=InvoiceCategories.creature, InvoiceDate=DateTime.Now},
+                    new Invoice {Header="Big bag", Description="there was stuff in it", Amount=50, InvoiceCategory=InvoiceCategories.MISC, InvoiceDate=DateTime.Now},
+                };
+                context.Invoices.AddRange(invoices);
+                await context.SaveChangesAsync();
+            }
 
-            context.Invoices.AddRange(Invoices);
-            context.SaveChanges();
+            var adminEmail = "TestAdmin@gmail.com";
+            var adminKey = "Admin";
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            if (adminUser == null)
+            {
+                adminUser = new User
+                {
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    EmailConfirmed = true
+                };
+
+                var createResult = await userManager.CreateAsync(adminUser, "Admin@123");
+
+                if (createResult.Succeeded)
+                {
+                    await userManager.AddClaimAsync(adminUser, new System.Security.Claims.Claim("AdminKey", adminKey));
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+            }
         }
-
     }
 }
