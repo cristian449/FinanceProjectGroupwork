@@ -40,7 +40,9 @@ namespace FinanceProject.Controllers
                     UserName = model.Email, 
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                    DateOfBirth = model.DateOfBirth,
                 };
                     var result = await _userManager.CreateAsync(user, model.Password);
 

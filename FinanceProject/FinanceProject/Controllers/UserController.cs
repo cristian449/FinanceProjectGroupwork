@@ -25,6 +25,7 @@ namespace FinanceProject.Controllers
             var model = new User
             {
                 FirstName = user.FirstName,
+                LastName = user.LastName,
                 Email = user.Email,
                 DateOfBirth = user.DateOfBirth,
                 PhoneNumber = user.PhoneNumber

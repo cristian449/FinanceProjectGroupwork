@@ -6,18 +6,24 @@
 
 <h1>Hi, <b>@Model.FirstName</b>!</h1>
 
-<h3>Your info</h3>
+<hr />
 <div>
-    <h5>DOB</h5>
-    <p>@Model.DateOfBirth</p>
+    <h4><b>Full name</b></h4>
+    <p>@Model.FirstName @Model.LastName</p>
 </div>
 <div>
+    <h4><b>Year of birth</b></h4>
+    <p>@Model.DateOfBirth.Year</p>
+</div>
+<div>
+    <h4><b>Email</b></h4>
     <button class="accordion">Click to reveal your email address</button>
 	<div class="panel">
 		<p>@Model.Email</p>
 	</div>
-</div>
+</div><br />
 <div>
+    <h4><b>Phone number</b></h4>
     <button class="accordion">Click to reveal your phone number</button>
     <div class="panel">
         <p>@Model.PhoneNumber</p>
