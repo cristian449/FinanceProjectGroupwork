@@ -7,6 +7,10 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+body {
+    background-image: src(finn.png);
+}
+
 a {
   color: #0077cc;
 }
@@ -49,3 +53,6 @@ button.accept-policy {
     color:azure;
 }
 
+.oodangerous {
+    color: red
+}

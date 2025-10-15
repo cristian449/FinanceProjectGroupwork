@@ -18,7 +18,7 @@ html {
 }
 
 body {
-
+    
     margin-bottom: 60px;
 }
 
@@ -91,3 +91,5 @@ footer[class='border-top footer text-muted'] {
     background-color: white;
     overflow: hidden;
 }
+
+

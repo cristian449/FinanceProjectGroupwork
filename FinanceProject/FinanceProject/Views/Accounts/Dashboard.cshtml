@@ -4,6 +4,21 @@
     ViewData["Title"] = "Dashboard";
 }
 
+<style>
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+
+    /* body {
+        background-image: url(Accounts/finn.png);
+    } */
+</style>
+<center>
+    <div style="background-image: url(Accounts/finn.png); background-repeat:no-repeat; background-size:100% 100%">
 <h1>Hi, <b>@Model.FirstName</b>!</h1>
 
 <hr />
@@ -28,17 +43,9 @@
     <div class="panel">
         <p>@Model.PhoneNumber</p>
     </div>
-</div>
-
-<style>
-    .panel {
-        padding: 0 18px;
-        background-color: white;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-    }
-</style>
+		</div>
+	</div>
+</center>
 
 <script defer>
     var acc = document.getElementsByClassName("accordion");

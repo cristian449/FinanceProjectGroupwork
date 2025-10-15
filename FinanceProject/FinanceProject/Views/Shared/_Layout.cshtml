@@ -47,10 +47,10 @@
                                     <i class="fas fa-user-circle me-1"></i> @User.Identity.Name
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><hr class="dropdown-divider"></li>
+                                    @* <li><hr class="dropdown-divider"></li> *@
                                     <li>
                                         <form class="form-inline" asp-controller="Accounts" asp-action="Logout">
-                                            <button type="submit" class="dropdown-item">Logout</button>
+                                            <button type="submit" class="dropdown-item oodangerous">Logout</button>
                                         </form>
                                     </li>
                                 </ul>
