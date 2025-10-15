@@ -5,6 +5,7 @@
 }
 
 
+
 <div class="row">
     <div class="col-md-6">
         <H1>Login in to your account plz</H1>
@@ -15,13 +16,14 @@
 
             <div class="form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" placeholder="YOUR EMAIL NOW!!!" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+                
             </div>
 
             <div class="form-group">
                 <label asp-for="Password"></label>
-                <input asp-for="Password" type="password" class="form-control" />
+                <input asp-for="Password" type="password" class="form-control"  placeholder="Dox yourself now" />
                 <span asp-validation-for="Password" class="text-danger"></span>
 
             </div>
@@ -36,15 +38,21 @@
 
 
 
-            <button type="submit" class="btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+
+            <a asp-area="" asp-controller="Accounts" asp-action="Register" class="navbar-text mt-3"> 
+            If you dont have an account you can register here now
+            </a>
+
+            
 
             
 
         </Form>
-        
+
         <Form>
 
-            <button asp-action="Back" type="submit" class="btn-primary">Back</button>
+            <button asp-action="Back" type="submit" class="btn btn-primary mt-2">Back</button>
             
         </Form>
     </div>
