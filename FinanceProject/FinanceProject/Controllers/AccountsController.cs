@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinanceProject.Controllers
 {
 
-    //Might change Controller name later dependant on if any of my teammates use the same name
     public class AccountsController : Controller
     {
 
