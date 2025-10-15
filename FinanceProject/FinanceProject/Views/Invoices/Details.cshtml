@@ -23,11 +23,11 @@
             <label>@Html.DisplayNameFor(Model => Model.Amount):</label><br>
             @if (Model.Amount > 0)
             {
-                <textarea disabled class="invoiceDetailValue" rows="1" style="color: green; font-weight: bold">+@Html.DisplayFor(Model => Model.Amount)€</textarea>
+                <textarea disabled class="invoiceDetailValue" rows="1" id="positiveValue">+@Html.DisplayFor(Model => Model.Amount)€</textarea>
             }
             else
             {
-                <textarea disabled class="invoiceDetailValue" rows="1" style="color: red; font-weight: bold">@Html.DisplayFor(Model => Model.Amount)€</textarea>
+                <textarea disabled class="invoiceDetailValue" rows="1" id="negativeValue">@Html.DisplayFor(Model => Model.Amount)€</textarea>
             }
         </div>
 

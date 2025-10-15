@@ -98,6 +98,16 @@ body {
     font-size: 32px;
 }
 
-.indexRow:hover {
+.invoiceContentRow:hover {
     background-color: ghostwhite;
+}
+
+#negativeValue {
+    color: red;
+    font-weight: bold
+}
+
+#positiveValue {
+    color: green;
+    font-weight: bold
 }

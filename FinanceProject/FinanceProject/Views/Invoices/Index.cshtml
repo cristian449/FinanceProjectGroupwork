@@ -6,14 +6,23 @@
 <div class="text-center">
     <h1 class="display-4">Invoices</h1> <br>
 
-    <div style="outline: solid, black, 1px">
-        <h1 class="display-5" style="font-weight: bold">Add new invoice</h1> <br>
+    <div>
         <a asp-action="Create">✎ Add new invoice</a>
     </div>
 </div>
 
 <div>
-    <h1>Invoice history</h1>
+    <div>
+        <h1>Invoice history</h1>
+        <label> Sort by category:</label>
+        <select id="categorySelect">
+            <option class="categoryOption">All</option>
+            @foreach (var category in Enum.GetValues(typeof(InvoiceCategories)))
+            {
+                <option class="categoryOption">@category</option>
+            }
+        </select>
+    </div>
 
     <table class="table">
         <thead>
@@ -35,10 +44,10 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="invoiceHistoryContent">
             @foreach (var item in Model.Reverse())
             {
-                <tr class="indexRow">
+                <tr class="invoiceContentRow">
                     <td style="width: 25%; max-width: 25%">
                         <button class="collapseButton">▼</button>
                         @Html.DisplayFor(i => item.Header)
@@ -51,11 +60,11 @@
                     <td>
                         @if (item.Amount > 0)
                         {
-                            <span style="color: green; font-weight: bold">+@item.Amount.ToString("N2")€</span>
+                            <span id="positiveValue">+@item.Amount.ToString("N2")€</span>
                         }
                         else
                         {
-                            <span style="color: red; font-weight: bold">@item.Amount.ToString("N2")€</span>
+                            <span id="negativeValue">@item.Amount.ToString("N2")€</span>
                         }
                     </td>
                     <th>
@@ -86,6 +95,26 @@
                     } else {
                         target.style.display = "none";
                         button.textContent = "▼";
+                    }
+                });
+            });
+
+            document.getElementById("categorySelect").addEventListener("change", e =>{
+                const selectedCategory = document.getElementById("categorySelect").value;
+                const rows = document.querySelectorAll(".invoiceContentRow");
+
+                rows.forEach(row => {
+                    const rowCategory = row.querySelector("th").innerHTML.trim();
+                    console.log(rowCategory);
+                    console.log(selectedCategory);
+
+                    if (selectedCategory == "All" || rowCategory == selectedCategory)
+                    {
+                        row.style.display = "";
+                    }
+                    else
+                    {
+                        row.style.display = "none";
                     }
                 });
             });
