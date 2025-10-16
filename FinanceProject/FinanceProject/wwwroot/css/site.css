@@ -18,8 +18,8 @@ html {
 }
 
 body {
-    
     margin-bottom: 60px;
+    background-image: url(~/lib/cubert/finn.png)
 }
 
 footer[class='border-top footer text-muted'] {

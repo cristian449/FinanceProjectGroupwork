@@ -13,12 +13,14 @@
         transition: max-height 0.2s ease-out;
     }
 
-    /* body {
-        background-image: url(Accounts/finn.png);
-    } */
+     body {
+            background-image: url(~/lib/cubert/finn.png);
+            background-repeat: no-repeat;
+            background-size:100% 100%;
+    } 
 </style>
 <center>
-    <div style="background-image: url(Accounts/finn.png); background-repeat:no-repeat; background-size:100% 100%">
+    <div @* style="background-image: url(~/lib/cubert/finn.png); background-repeat:no-repeat; background-size:100% 100%" *@>
 <h1>Hi, <b>@Model.FirstName</b>!</h1>
 
 <hr />
@@ -27,19 +29,19 @@
     <p>@Model.FirstName @Model.LastName</p>
 </div>
 <div>
-    <h4><b>Year of birth</b></h4>
-    <p>@Model.DateOfBirth.Year</p>
+    <h4><b>Date of birth</b></h4>
+            <p>@Model.DateOfBirth.Day&#46;@Model.DateOfBirth.Month&#46;@Model.DateOfBirth.Year</p> @* very yanderedev type of code i know but it'll stay like that for now *@
 </div>
 <div>
     <h4><b>Email</b></h4>
-    <button class="accordion">Click to reveal your email address</button>
+    <button class="damail">Click to reveal your email address</button>
 	<div class="panel">
 		<p>@Model.Email</p>
 	</div>
 </div><br />
 <div>
     <h4><b>Phone number</b></h4>
-    <button class="accordion">Click to reveal your phone number</button>
+    <button class="dafoam">Click to reveal your phone number</button>
     <div class="panel">
         <p>@Model.PhoneNumber</p>
     </div>
@@ -48,17 +50,34 @@
 </center>
 
 <script defer>
-    var acc = document.getElementsByClassName("accordion");
+    var foam = document.getElementsByClassName("dafoam");
+    var male = document.getElementsByClassName("damail");
     var i;
 
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
+    for (i = 0; i < foam.length; i++) {
+      foam[i].addEventListener("click", function() {
         this.classList.toggle("active");
         var panel = this.nextElementSibling;
         if (panel.style.maxHeight) {
           panel.style.maxHeight = null;
+          foam.textContent = 'Click to reveal your phone number';
         } else {
           panel.style.maxHeight = panel.scrollHeight + "px";
+          foam.textContent = 'Click to hide your phone number';
+        }
+      });
+    }
+
+    for (i = 0; i < male.length; i++) {
+      male[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+          male.textContent = 'Click to reveal your email address';
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          male.textContent = 'Click to hide your email address';
         }
       });
     }
