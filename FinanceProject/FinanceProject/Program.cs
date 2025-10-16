@@ -1,7 +1,6 @@
 using FinanceProject.Data;
 using FinanceProject.Models;
-
-
+using FinanceProject.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +26,8 @@ namespace FinanceProject
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
             });
+
+            builder.Services.AddScoped<EmailsServices>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -61,6 +62,7 @@ namespace FinanceProject
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
 
             app.UseRouting();
 

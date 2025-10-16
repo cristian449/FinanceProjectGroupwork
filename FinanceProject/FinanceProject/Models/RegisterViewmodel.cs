@@ -26,4 +26,5 @@ namespace FinanceProject.Models
         [DataType(DataType.Password)]
         public string Confirmpassword { get; set; }
     }
+
 }
