@@ -1,0 +1,10 @@
+﻿namespace FinanceProject.Models
+{
+    public class EmailViewmodel
+    {
+        public string To { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+    }
+}
+    
