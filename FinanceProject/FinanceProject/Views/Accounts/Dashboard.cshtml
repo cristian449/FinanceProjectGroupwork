@@ -34,14 +34,14 @@
 </div>
 <div>
     <h4><b>Email</b></h4>
-    <button class="damail">Click to reveal your email address</button>
+    <button class="damail">Click for email</button>
 	<div class="panel">
 		<p>@Model.Email</p>
 	</div>
 </div><br />
 <div>
     <h4><b>Phone number</b></h4>
-    <button class="dafoam">Click to reveal your phone number</button>
+    <button class="dafoam">Click for phone number</button>
     <div class="panel">
         <p>@Model.PhoneNumber</p>
     </div>
@@ -60,10 +60,11 @@
         var panel = this.nextElementSibling;
         if (panel.style.maxHeight) {
           panel.style.maxHeight = null;
-          foam.textContent = 'Click to reveal your phone number';
+          // foam.textContent = 'Click to reveal your phone number';
+          foam.innerText = "Click to reveal your phone number"
         } else {
           panel.style.maxHeight = panel.scrollHeight + "px";
-          foam.textContent = 'Click to hide your phone number';
+          foam.innerText = "Click to hide your phone number";
         }
       });
     }
@@ -74,10 +75,10 @@
         var panel = this.nextElementSibling;
         if (panel.style.maxHeight) {
           panel.style.maxHeight = null;
-          male.textContent = 'Click to reveal your email address';
+          male.innerText = 'Click to reveal your email address';
         } else {
           panel.style.maxHeight = panel.scrollHeight + "px";
-          male.textContent = 'Click to hide your email address';
+          male.innerText = 'Click to hide your email address';
         }
       });
     }
