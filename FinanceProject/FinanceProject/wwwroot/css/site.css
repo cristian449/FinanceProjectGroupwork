@@ -19,7 +19,8 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-image: url(~/lib/cubert/finn.png)
+    background-image: url(~/lib/cubert/finn.png);
+    font-family: Garamond;
 }
 
 footer[class='border-top footer text-muted'] {
