@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" id="topNav">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FinancesddsfProject</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FinanceProject</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -113,18 +113,63 @@
                 </div>
             </div>
         </nav>
+        @* Making left navbar separate *@
+        <nav id="sideNav">
+            <ul>
+                <li><a href="#"><img src=""><span>Invoices</span></a></li>
+                <li><a href="#"><img src=""><span>Dashboard</span></a></li>
+                <li><a href="#"><img src=""><span>BLABLABLA</span></a></li>
+                <li><a href="#"><img src=""><span>TEST TING</span></a></li>
+                @* Template for da links *@
+                @* <li><a href="#"><img src=""><span>TEST</span></a></li> *@
+
+                <li style="margin-top: auto; margin-bottom: 10px"><a href="#"><img src=""><span>Logout</span></a></li>
+            </ul>
+        </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="margin-left: 70px;">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" id="bottomNav">
         <div class="container">
             &copy; 2025 - FinanceProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script>
+        console.log("hi");
+
+        window.addEventListener("load", (e) => {
+
+            const sideNav = document.getElementById("sideNav");
+
+            function ResizeSideNavTop()
+            {
+                const topHeight = getComputedStyle(topNav).height;
+                sideNav.style.top = topHeight;
+                console.log("New top: " + getComputedStyle(topNav).height);
+            }
+
+            // function ResizeSideNavBottom()
+            // {
+            //     const bottomHeight = getComputedStyle(bottomNav).height;
+            //     sideNav.style.bottom = bottomHeight;
+            //     console.log("New bottom: " + getComputedStyle(bottomNav).height);
+            // }
+
+            ResizeSideNavTop()
+            // ResizeSideNavBottom()
+
+            const resizeObserverTop = new ResizeObserver(entries => ResizeSideNavTop());
+            // const resizeObserverBottom = new ResizeObserver(entries => ResizeSideNavBottom());
+
+            resizeObserverTop.observe(document.getElementById("topNav"))
+            // resizeObserverBottom.observe(document.getElementById("bottomNav"))
+        });
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
