@@ -85,3 +85,63 @@ body {
     background-color: white;
     overflow: hidden;
 }
+
+#sideNav {
+    position: fixed;
+    left: 0;
+    bottom: 0px;
+    top: 60px;
+    width: 70px;
+    background-color: black;
+    color: white;
+    transition: width 0.25s ease;
+    overflow: hidden;
+    z-index: 999;
+}
+
+#sideNav:hover {
+    width: 200px;
+}
+
+#sideNav ul li a {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#sideNav ul li a:hover {
+    background-color: #2a74a5;
+}
+
+#sideNav ul {
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+    padding-top: 10px;
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    height: 100%;
+}
+
+#sideNav img{
+    width: 40px;
+    height: 40px;
+}
+
+#sideNav span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    color: white;
+    padding-left: 10px;
+}
+
+#sideNav:hover span {
+    opacity: 0.8;
+}
