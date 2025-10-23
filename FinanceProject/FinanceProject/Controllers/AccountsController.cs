@@ -48,17 +48,14 @@ namespace FinanceProject.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Generate the email confirmation token
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    // Build verification link
                     var confirmationLink = Url.Action(
                         "VerifyEmail",
                         "Accounts",
                         new { userId = user.Id, token = token },
                         protocol: Request.Scheme);
 
-                    // Build email content
                     var body = $@"
                         <h2>Welcome to FinanceProject!</h2>
                         <p>Please verify your email address by clicking the link below:</p>
@@ -86,7 +83,6 @@ namespace FinanceProject.Controllers
             return View(model);
         }
 
-        // Verify Email Endpoint
         [HttpGet]
         public async Task<IActionResult> VerifyEmail(string userId, string token)
         {
@@ -123,7 +119,6 @@ namespace FinanceProject.Controllers
                     return View(model);
                 }
 
-                // Ensure email is verified
                 if (!await _userManager.IsEmailConfirmedAsync(user))
                 {
                     ModelState.AddModelError("Email", "Please verify your email before logging in.");
