@@ -1,17 +1,21 @@
-﻿@model IEnumerable<FinanceProject.Models.User>
+﻿@model IEnumerable<FinanceProject.Models.User> 
 
 
 @* Practically Serves Absolutely NO PURPOPOSSEESSBecause how the fuckx do i see if a user is active if me use localdb, though it does show admin as inactive, will investiage later *@
 <h2>Currently active Users</h2>
 <table>
     <tr>
-        <th>Name</th>
+        <th>User ID</th>
+        <th>FirstName</th>
+		<th>LastName</th>
         <th>Email</th>
     </tr>
     @foreach (var user in Model.Where(i => i.IsActive))
     {
         <tr>
-            <td>@user.UserName</td>
+            <td>@user.Id</td>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
             <td>@user.Email</td>
         </tr>
     }
@@ -20,13 +24,17 @@
 <h2>Currently Inactive Users</h2>
 <table>
     <tr>
-        <th>Name</th>
+        <th>User ID</th>
+        <th>FirstName</th>
+		<th>LastName</th>
         <th>Email</th>
     </tr>
     @foreach (var user in Model.Where(i => !i.IsActive))
     {
         <tr>
-            <td>@user.UserName</td>
+            <td>@user.Id</td>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
             <td>@user.Email</td>
         </tr>
     }

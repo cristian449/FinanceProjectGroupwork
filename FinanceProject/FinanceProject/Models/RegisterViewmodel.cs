@@ -4,6 +4,7 @@ namespace FinanceProject.Models
 {
     public class RegisterViewmodel
     {
+
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -25,6 +26,7 @@ namespace FinanceProject.Models
         [Required]
         [DataType(DataType.Password)]
         public string Confirmpassword { get; set; }
+
     }
 
 }

@@ -40,6 +40,8 @@ namespace FinanceProject.Controllers
 
                 var user = new User
                 {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
                     UserName = model.Email,
                     Email = model.Email
                 };
