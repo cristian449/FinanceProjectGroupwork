@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinanceProject.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body>@* bg-white *@
+	<header style="background-color: #164d8f; color: azure;">@* navbar-light *@
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm   border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <a style="color: azure;" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/lib/cubert/fml.png" width="30" height="30" />
                     Sosig
                 </a>
@@ -25,20 +25,20 @@
                         <li class="nav-item">
                         @if (!User.Identity.IsAuthenticated)
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Accounts" asp-action="Register">Register</a>
+							<li class="nav-item">@* text-dark *@
+                                <a style="color: azure;" class="nav-link " asp-area="" asp-controller="Accounts" asp-action="Register">Register</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Accounts" asp-action="Login">Login</a>
+							<li class="nav-item">@* text-dark *@
+                                <a style="color: azure;" class="nav-link " asp-area="" asp-controller="Accounts" asp-action="Login">Login</a>
                         </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Dashboard">Dashboard</a>
+							<li>@* text-dark *@
+                                <a style="color: azure;" class="nav-link " asp-area="" asp-controller="User" asp-action="Dashboard">Dashboard</a>
                             </li>
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
+							<li>@* text-dark *@
+                                <a style="color: azure;" class="nav-link " asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
                             </li>
                         }
                     </ul>

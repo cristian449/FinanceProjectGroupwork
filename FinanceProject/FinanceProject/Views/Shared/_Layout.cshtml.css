@@ -7,12 +7,13 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-body {
+/*body {
     background-image: src(finn.png);
-}
+}*/
 
 a {
-  color: #0077cc;
+  /*color: #0077cc;*/
+  color: azure;
 }
 
 .btn-primary {
@@ -22,7 +23,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: /*#fff*/azure;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
@@ -42,6 +43,14 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
+
+header {
+    /*background-color: #1b5091;*/
+    background-color: #164d8f;
+    
+}
+
+
 
 .footer {
     position: absolute;

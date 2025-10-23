@@ -19,8 +19,13 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-image: url(~/lib/cubert/finn.png);
     font-family: Garamond;
+}
+
+/*dw bout it*/
+.adminge {
+    background-color: red;
+    color: azure;
 }
 
 footer[class='border-top footer text-muted'] {
