@@ -15,9 +15,10 @@ namespace FinanceProject.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult UserManaging()
+        [HttpGet]
+        public async Task<IActionResult> UserManaging()
         {
-            var user = _userManager.Users.ToList();
+            var users = _userManager.Users.ToList();
             return View(users);
         }
     }
