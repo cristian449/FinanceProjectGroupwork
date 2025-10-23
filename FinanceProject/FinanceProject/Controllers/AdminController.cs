@@ -21,5 +21,18 @@ namespace FinanceProject.Controllers
             var users = _userManager.Users.ToList();
             return View(users);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+            return RedirectToAction("UserManaging");
+        }
+
     }
 }
