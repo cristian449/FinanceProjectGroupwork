@@ -10,10 +10,13 @@ namespace FinanceProject.Controllers
     {
         private readonly UserManager<User> _userManager;
 
-        public UserController(UserManager<User> userManager)
+        private readonly SignInManager<User> _signInManager;
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
+
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
@@ -25,6 +28,7 @@ namespace FinanceProject.Controllers
 
             var model = new User
             {
+                Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
@@ -33,16 +37,16 @@ namespace FinanceProject.Controllers
             };
 
             return View("~/Views/Accounts/Dashboard.cshtml", model);
-        }
+        }/*
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var user = await _userManager.Users.FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _userManager.FindByIdAsync(id);
 
             if (user == null)
             {
@@ -54,13 +58,26 @@ namespace FinanceProject.Controllers
         //return of the 𝓯𝓻𝓮𝓪𝓴𝔂 delete from TARpe23Contoso
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var user = await _userManager.DeleteAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
 
-            if (user == null) { return RedirectToAction("Index"); }
+            if (user == null) { return RedirectToAction("~/Views/Home/Index.cshtml"); }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("~/Views/Home/Index.cshtml");
+        }*/
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+                await _signInManager.SignOutAsync(); //this is likely completely useless but it's staying
+            }
+            return RedirectToAction("Back", "Accounts");
         }
     }
 }
