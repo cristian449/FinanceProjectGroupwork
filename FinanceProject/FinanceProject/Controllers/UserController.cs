@@ -37,36 +37,7 @@ namespace FinanceProject.Controllers
             };
 
             return View("~/Views/Accounts/Dashboard.cshtml", model);
-        }/*
-        [Authorize]
-        [HttpGet]
-        public async Task<IActionResult> Delete(string? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var user = await _userManager.FindByIdAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
         }
-
-        //return of the 𝓯𝓻𝓮𝓪𝓴𝔂 delete from TARpe23Contoso
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            await _userManager.DeleteAsync(user);
-
-            if (user == null) { return RedirectToAction("~/Views/Home/Index.cshtml"); }
-
-            return RedirectToAction("~/Views/Home/Index.cshtml");
-        }*/
 
         [HttpPost]
         public async Task<IActionResult> DeleteUser(Guid id)
@@ -75,9 +46,40 @@ namespace FinanceProject.Controllers
             if (user != null)
             {
                 await _userManager.DeleteAsync(user);
-                await _signInManager.SignOutAsync(); //this is likely completely useless but it's staying
+                return RedirectToAction("Logout", "Accounts"); //this is likely completely useless but it's staying
             }
             return RedirectToAction("Back", "Accounts");
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
+                var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View();
+                }
+                await _signInManager.RefreshSignInAsync(user);
+                return View("ChangePasswordConfirmation");
+            }
+            return View(model);
         }
     }
 }
