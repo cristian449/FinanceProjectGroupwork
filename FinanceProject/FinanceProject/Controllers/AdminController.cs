@@ -23,6 +23,19 @@ namespace FinanceProject.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> UserDetails(Guid id)
+        {
+            var user = _userManager.Users.FirstOrDefault(i => i.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> DeleteUser(Guid id)
         {

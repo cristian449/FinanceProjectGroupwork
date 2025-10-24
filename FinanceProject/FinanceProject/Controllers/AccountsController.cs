@@ -1,5 +1,6 @@
 ﻿using FinanceProject.Models;
 using FinanceProject.Services;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
@@ -42,8 +43,10 @@ namespace FinanceProject.Controllers
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                    CreatedAt = DateTime.UtcNow,
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
