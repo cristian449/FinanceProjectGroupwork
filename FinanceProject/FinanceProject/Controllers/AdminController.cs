@@ -1,4 +1,5 @@
-﻿using FinanceProject.Models;
+﻿using System.Globalization;
+using FinanceProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,18 @@ namespace FinanceProject.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UserManaging()
+        public async Task<IActionResult> UserManaging(SortUsersBy? sortBy)
         {
             var users = _userManager.Users.ToList();
+
+            users = sortBy switch
+            {
+                SortUsersBy.FirstName => users.OrderBy(u => u.FirstName).ToList(),
+                SortUsersBy.CreatedAt => users.OrderBy(u => u.CreatedAt).ToList(),
+                _ => users
+            };
+            ViewBag.SortBy = sortBy;
+
             return View(users);
         }
 

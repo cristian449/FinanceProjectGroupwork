@@ -3,6 +3,12 @@
 
 namespace FinanceProject.Models
 {
+    public enum SortUsersBy
+    {
+        FirstName,
+        CreatedAt
+    }
+
     public class User : IdentityUser<Guid>
     {
         //IsActive does duck all at the current moment
@@ -19,6 +25,7 @@ namespace FinanceProject.Models
         public string? PhoneNumber { get; set; }
 
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+
 
 
 
