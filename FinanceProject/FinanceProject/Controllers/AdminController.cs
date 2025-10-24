@@ -47,5 +47,25 @@ namespace FinanceProject.Controllers
             return RedirectToAction("UserManaging");
         }
 
+
+
+        //Currently seems that when making a user into an Admin, the new Admin does not need the AdminKey
+        // to access Admin features. This may need to be changed in the future.
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeRole(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user != null)
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
+            return RedirectToAction("UserManaging");
+        }
+
+
+
     }
 }
