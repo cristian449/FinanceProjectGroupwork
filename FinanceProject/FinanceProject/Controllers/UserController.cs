@@ -65,7 +65,7 @@ namespace FinanceProject.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 if (user == null)
                 {
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Login", "Accounts");
                 }
                 var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
                 if (!result.Succeeded)
@@ -74,12 +74,13 @@ namespace FinanceProject.Controllers
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
-                    return View();
+                    return View("~/Views/Accounts/ChangePassword.cshtml");
                 }
                 await _signInManager.RefreshSignInAsync(user);
-                return View("ChangePasswordConfirmation");
+                //return View("ChangePasswordConfirmation");
+                return View("~/Views/Home/Index.cshtml");
             }
-            return View(model);
+            return View("~/Views/Accounts/ChangePassword.cshtml", model);
         }
     }
 }

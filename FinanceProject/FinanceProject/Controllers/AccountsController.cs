@@ -51,7 +51,7 @@ namespace FinanceProject.Controllers
 
                         await _signInManager.SignInAsync(user, isPersistent: false);
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Dashboard", "User");
 
                     }
 
@@ -86,7 +86,7 @@ namespace FinanceProject.Controllers
 
 
                 if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "User");
 
                 ModelState.AddModelError("", "Invalid login attempt");
             }
