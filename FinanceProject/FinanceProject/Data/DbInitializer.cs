@@ -1,6 +1,7 @@
 ﻿using FinanceProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1;
 using System;
 
 namespace FinanceProject.Data
@@ -26,7 +27,9 @@ namespace FinanceProject.Data
                 context.Invoices.AddRange(invoices);
                 await context.SaveChangesAsync();
             }
-
+            var AdminFirstName = "CALAMARIA";
+            var AdminLastName = "OOGABOOGA";
+            var AdminCreate = DateTime.Now;
             var adminEmail = "TestAdmin@gmail.com";
             var adminKey = "Admin";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
@@ -34,6 +37,9 @@ namespace FinanceProject.Data
             {
                 adminUser = new User
                 {
+                    FirstName = AdminFirstName,
+                    LastName = AdminLastName,
+                    CreatedAt = AdminCreate,
                     UserName = adminEmail,
                     Email = adminEmail,
                     EmailConfirmed = true

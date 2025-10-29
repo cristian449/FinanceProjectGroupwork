@@ -36,23 +36,23 @@ namespace FinanceProject.Controllers
 
             try
             {
-                // Generate a secure token for testing purposes
+
                 var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
 
-                // Create a simple verification link (replace your domain in production)
+                // Creating a simple verification
                 var verificationLink = Url.Action(
                     "Verify",
                     "Emails",
                     new { email = viewModel.To, token = token },
                     Request.Scheme);
 
-                // Build email body
+                // Build email body, the body sent to the user
                 var body = $@"
                     <h2>Email Verification</h2>
                     <p>Click the link below to verify your email address:</p>
                     <a href='{verificationLink}'>Verify Email</a>";
 
-                // Send email
+                // Send email 
                 _emailService.SendEmail(viewModel.To, "Verify your email", body);
 
                 ViewBag.Message = "Verification email sent successfully!";
@@ -76,7 +76,7 @@ namespace FinanceProject.Controllers
                 return View();
             }
 
-            // In production: validate token from DB and mark user as verified
+            // Validate token from DB and mark user as verified
             ViewBag.Success = true;
             ViewBag.Email = email;
             return View();
