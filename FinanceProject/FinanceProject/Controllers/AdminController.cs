@@ -72,6 +72,7 @@ namespace FinanceProject.Controllers
                 await _userManager.RemoveFromRolesAsync(user, currentRoles);
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
+            
             return RedirectToAction("UserManaging");
         }
 

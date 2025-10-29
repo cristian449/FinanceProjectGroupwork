@@ -4,6 +4,21 @@
     var sortBy = ViewBag.SortBy as SortUsersBy?;
 }
 
+<form asp-action="UserManaging" method="get" style="margin-bottom:1em;">
+    <label>Sort users by:</label>
+    <select name="sortBy" onchange="this.form.submit()">
+        <option value="">All</option>
+        @foreach (SortUsersBy category in Enum.GetValues(typeof(SortUsersBy)))
+        {
+            <option value="@category" selected="@(ViewBag.SortBy == category ? "selected" : null)">
+                @category
+            </option>
+        }
+    </select>
+</form>
+
+
+
 
 @* Practically Serves Absolutely NO PURPOPOSSEESSBecause how the duckx do i see if a user is active if me use localdb, though it does show admin as inactive despite being logged in
     , will investiage later *@
@@ -15,7 +30,6 @@
 		<th>LastName</th>
         <th>Email</th>
         <th>Account Created on</th>
-        <th>Sort by</th>
     </tr>
     @foreach (var user in Model.Where(i => i.IsActive))
     {
@@ -43,16 +57,8 @@
 		<th>LastName</th>
         <th>Email</th>
         <th>Account Created on</th>
-           <form asp-action="UserManaging" method="get" style="margin-bottom:1em;">
-            <label>Sort users by:</label>
-            <select name="sortBy" onchange="this.form.submit()">
-                <option value="">All</option>
-                @foreach (SortUsersBy category in Enum.GetValues(typeof(SortUsersBy)))
-                {
-                    <option value="@category" @(sortBy == category ? "selected" : "")>@category</option>
-                }
-            </select>
-        </form>
+
+
     </tr>
     @foreach (var user in Model.Where(i => !i.IsActive))
     {
