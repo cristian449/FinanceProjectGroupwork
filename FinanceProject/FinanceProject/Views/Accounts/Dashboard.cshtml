@@ -51,8 +51,15 @@
             <form asp-controller="User" asp-action="ChangePassword">
                 <button type="submit" class="action-btn btn btn-primary">Change Password</button>
             </form>
-        </div><br /><br />
+        </div><br />
 
+        <div>
+            <form asp-controller="User" asp-action="ChangeEmail">
+                <button type="submit" class="action-btn btn btn-primary">Change Email</button>
+            </form>
+        </div>
+
+        <br /><br />
         <div>
             <form asp-action="DeleteUser" asp-route-id="@Model.Id" method="post" style="display:inline;">
                 <button type="submit" class="action-btn btn btn-danger" onclick="return confirm('Are you sure you want to delete your account?');">DELETE THIS ACCOUNT</button>

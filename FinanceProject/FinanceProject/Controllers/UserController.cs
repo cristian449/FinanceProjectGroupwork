@@ -1,7 +1,10 @@
-﻿using FinanceProject.Models;
+﻿using System.Security.Cryptography;
+using System.Text;
+using FinanceProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceProject.Controllers
@@ -38,7 +41,7 @@ namespace FinanceProject.Controllers
 
             return View("~/Views/Accounts/Dashboard.cshtml", model);
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
@@ -50,13 +53,13 @@ namespace FinanceProject.Controllers
             }
             return RedirectToAction("Back", "Accounts");
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult ChangePassword()
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -78,9 +81,44 @@ namespace FinanceProject.Controllers
                 }
                 await _signInManager.RefreshSignInAsync(user);
                 //return View("ChangePasswordConfirmation");
-                return View("~/Views/Home/Index.cshtml");
+                //return View("~/Views/Home/Index.cshtml");
+                return RedirectToAction("Logout", "Accounts");
             }
             return View("~/Views/Accounts/ChangePassword.cshtml", model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult ChangeEmail()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ChangeEmail(ChangeEmailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Accounts");
+                }
+                var token = await _userManager.GenerateChangeEmailTokenAsync(user, model.NewEmail); //i have no clue what i'm doing :D   it make-a no sense 
+                token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token)); 
+                var result = await _userManager.ChangeEmailAsync(user, model.NewEmail, token);
+                if (!result.Succeeded)// hahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha whoss oll thiss then??
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View("~/Views/Accounts/ChangeEmail.cshtml");
+                }
+                await _signInManager.RefreshSignInAsync(user);
+                return RedirectToAction("Logout", "Accounts");
+            }
+            return View("~/Views/Accounts/ChangeEmail.cshtml", model);
         }
     }
 }
