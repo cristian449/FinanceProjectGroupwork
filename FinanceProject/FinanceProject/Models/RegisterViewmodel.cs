@@ -6,10 +6,14 @@ namespace FinanceProject.Models
     {
 
         [Required]
+        [MaxLength(32)]
         public string FirstName { get; set; }
         [Required]
+        [MaxLength(32)]
         public string LastName { get; set; }
         [Required]
+        [DataType(DataType.PhoneNumber)]
+        [MaxLength(8)]
         public string PhoneNumber { get; set; }
         [Required]
         [DataType(DataType.Date)]

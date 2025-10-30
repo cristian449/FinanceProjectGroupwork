@@ -130,6 +130,7 @@ namespace FinanceProject.Controllers
                     return View(model);
                 }
 
+                //To make admin key work again, emails screwed over i think, might need to change this later
                 var result = await _signInManager.PasswordSignInAsync(
                     model.Email,
                     model.Password,
@@ -139,6 +140,12 @@ namespace FinanceProject.Controllers
 
                 if (result.Succeeded)
                 {
+                    //Makes the user active when loggin in
+                    user.IsActive = true;
+                    user.LastActive = DateTime.UtcNow;
+                    await _userManager.UpdateAsync(user);
+
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -150,8 +157,17 @@ namespace FinanceProject.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                user.IsActive = false;
+                user.LastActive = DateTime.UtcNow;
+                await _userManager.UpdateAsync(user);
+            }
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+
+
         }
 
         public IActionResult Back()

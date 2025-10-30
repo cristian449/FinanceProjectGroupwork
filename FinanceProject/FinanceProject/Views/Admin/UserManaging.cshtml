@@ -4,27 +4,27 @@
     var sortBy = ViewBag.SortBy as SortUsersBy?;
 }
 
-<form asp-action="UserManaging" method="get" style="margin-bottom:1em;">
-    <label>Sort users by:</label>
-    <select name="sortBy" onchange="this.form.submit()">
-        <option value="">All</option>
-        @foreach (SortUsersBy category in Enum.GetValues(typeof(SortUsersBy)))
-        {
-            <option value="@category" selected="@(ViewBag.SortBy == category ? "selected" : null)">
-                @category
-            </option>
-        }
-    </select>
-</form>
 
 
 
 
-@* Practically Serves Absolutely NO PURPOPOSSEESSBecause how the duckx do i see if a user is active if me use localdb, though it does show admin as inactive despite being logged in
-    , will investiage later *@
+
+@*OK now userActive work, at least it shows Admin as Active when logging in*@
 <h2>Currently active Users</h2>
 <div class="scrollable-table">
     <table>
+        <form asp-action="UserManaging" method="get" style="margin-bottom:1em;">
+            <label>Sort users by:</label>
+            <select name="sortBy" onchange="this.form.submit()">
+                <option value="">All</option>
+                @foreach (SortUsersBy category in Enum.GetValues(typeof(SortUsersBy)))
+                {
+                    <option value="@category" selected="@(ViewBag.SortBy == category ? "selected" : null)">
+                        @category
+                    </option>
+                }
+            </select>
+        </form>
         <tr>
             <th>User ID</th>
             <th>FirstName</th>
@@ -32,14 +32,14 @@
             <th>Email</th>
             <th>Account Created on</th>
         </tr>
-        @foreach (var user in Model.Where(i => i.IsActive))
+        @foreach (var user in Model.Where(i => i.IsActive == true))
         {
             <tr>
                 <td>@user.Id</td>
                 <td>@user.FirstName</td>
                 <td>@user.LastName</td>
                 <td>@user.Email</td>
-                <td>@user.CreatedAt<td/>
+                <td>@user.CreatedAt</td>
                 <td>
                     <a asp-action="UserDetails" asp-route-id="@user.Id" class="action-btn btn btn-info">Details</a>
                     <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post" style="display:inline;">
@@ -54,6 +54,18 @@
 <h2>Currently Inactive Users</h2>
 <div class="scrollable-table">
     <table>
+        <form asp-action="UserManaging" method="get" style="margin-bottom:1em;">
+            <label>Sort users by:</label>
+            <select name="sortBy" onchange="this.form.submit()">
+                <option value="">All</option>
+                @foreach (SortUsersBy category in Enum.GetValues(typeof(SortUsersBy)))
+                {
+                    <option value="@category" selected="@(ViewBag.SortBy == category ? "selected" : null)">
+                        @category
+                    </option>
+                }
+            </select>
+        </form>
         <tr>
             <th>User ID</th>
             <th>FirstName</th>
@@ -86,53 +98,51 @@
     </table>
 </div>
 
-<style>
-    .scrollable-table {
-        max-height: 450px;
-        overflow-y: auto;
-        display: block;
-    }
+    <style>
+        .scrollable-table {
+            max-height: 450px;
+            overflow-y: auto;
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2em;
+        }
 
 
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 2em;
-    }
+        th {
+            background-color: #f3f3f3;
+            font-weight: bold;
+        }
 
+        tr:hover {
+            background-color: #f9f9f9;
+        }
 
-    th, td {
-        padding: 12px 20px;
-        text-align: left;
-        border-bottom: 1px solid #ccc;
-    }
+        h2 {
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+        }
 
-    th {
-        background-color: #f3f3f3;
-        font-weight: bold;
-    }
+        .action-btn {
+            margin-right: 5px;
+        }
 
-    tr:hover {
-        background-color: #f9f9f9;
-    }
+        form {
+            display: inline;
+        }
 
-    h2 {
-        margin-top: 2em;
-        margin-bottom: 0.5em;
-    }
-
-    .action-btn {
-        margin-right: 5px;
-    }
-
-    form {
-        display: inline;
-    }
-
-    select {
-        margin-left: 0.5em;
-        padding: 4px 6px;
-    }
-</style>
+        select {
+            margin-left: 0.5em;
+            padding: 4px 6px;
+        }
+    </style>
 
