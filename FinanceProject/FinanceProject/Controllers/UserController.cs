@@ -104,10 +104,10 @@ namespace FinanceProject.Controllers
                 {
                     return RedirectToAction("Login", "Accounts");
                 }
-                var token = await _userManager.GenerateChangeEmailTokenAsync(user, model.NewEmail); //i have no clue what i'm doing :D   it make-a no sense 
-                token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token)); 
+                var token = await _userManager.GenerateChangeEmailTokenAsync(user, model.NewEmail); 
                 var result = await _userManager.ChangeEmailAsync(user, model.NewEmail, token);
-                if (!result.Succeeded)// hahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha whoss oll thiss then??
+                var what = await _userManager.SetUserNameAsync(user, model.NewEmail); // this looks so awful but it works i tinx
+                if (!result.Succeeded || !what.Succeeded)
                 {
                     foreach (var error in result.Errors)
                     {
@@ -115,6 +115,8 @@ namespace FinanceProject.Controllers
                     }
                     return View("~/Views/Accounts/ChangeEmail.cshtml");
                 }
+                await _signInManager.RefreshSignInAsync(user);
+                user.UserName = model.NewEmail;
                 await _signInManager.RefreshSignInAsync(user);
                 return RedirectToAction("Logout", "Accounts");
             }
