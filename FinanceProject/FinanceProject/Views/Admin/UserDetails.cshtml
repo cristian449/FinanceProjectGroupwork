@@ -1,0 +1,62 @@
+﻿@model FinanceProject.Models.User
+
+<h2>User Details</h2>
+<table>
+	<tr>
+		<td>Id: @Model.Id</td>
+	</tr>
+	<tr>
+		<td>FirstName:   @Model.FirstName</td>
+	</tr>
+	<tr>
+		<td>LastName:   @Model.LastName</td>
+	</tr>
+	<tr>
+		<td>Email:   @Model.Email</td>
+	</tr>
+	<tr>
+		<td>Phone Number:   @Model.PhoneNumber</td>
+	</tr>
+	<tr>
+		<td>Account Created on:   @Model.CreatedAt</td>
+	</tr>
+	<tr>
+		<td>Last Active: @Model.LastActive</td>
+	</tr>
+	<tr>
+		<td>Is Currently Active:   @Model.IsActive</td>
+	</tr>
+	<td>
+		<a asp-action="UserManaging"  class="action-btn btn btn-info">Back</a>
+		<form asp-action="DeleteUser" asp-route-id="@Model.Id" method="post" style="display:inline;">
+			<button type="submit" class="action-btn btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+		</form>
+	</td>
+
+</table>
+
+
+<style>
+
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 2em;
+	}
+
+
+	th, td {
+		padding: 12px 20px;
+		text-align: left;
+		border-bottom: 1px solid #ccc;
+	}
+
+	th {
+		background-color: #f3f3f3;
+		font-weight: bold;
+	}
+
+
+
+</style>

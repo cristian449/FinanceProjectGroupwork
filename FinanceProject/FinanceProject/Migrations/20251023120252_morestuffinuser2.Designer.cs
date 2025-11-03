@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceProject.Migrations
 {
     [DbContext(typeof(FinancesDbContext))]
-    [Migration("20251009102237_MainProjMigrationV1")]
-    partial class MainProjMigrationV1
+    [Migration("20251023120252_morestuffinuser2")]
+    partial class morestuffinuser2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,6 +74,12 @@ namespace FinanceProject.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")

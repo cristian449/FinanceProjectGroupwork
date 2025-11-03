@@ -1,0 +1,19 @@
+﻿@model FinanceProject.Models.EmailViewmodel
+
+<div class="container mt-4">
+    <h3>Email Verification Test</h3>
+    <form asp-action="SendEmail" method="post">
+        <div class="form-group">
+            <label asp-for="To">Enter Email</label>
+            <input asp-for="To" class="form-control" placeholder="Enter your email" />
+            <span asp-validation-for="To" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Send Verification Email</button>
+    </form>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info mt-3">@ViewBag.Message</div>
+    }
+</div>

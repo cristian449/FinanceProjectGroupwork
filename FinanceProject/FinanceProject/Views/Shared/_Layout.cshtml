@@ -12,9 +12,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" id="topNav">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FinanceProject</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FinancesddsfProject</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -27,8 +27,8 @@
 
 
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Accounts" asp-action="Login">
+                            <li class="nav-item me-2">
+                                <a class="btn btn-primary nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Accounts" asp-action="Login">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 30 30">
                                         <path d="M26,30H14a2,2,0,0,1-2-2V25h2v3H26V4H14V7H12V4a2,2,0,0,1,2-2H26a2,2,0,0,1,2,2V28A2,2,0,0,1,26,30Z" />
                                         <polygon points="14.59 20.59 18.17 17 4 17 4 15 18.17 15 14.59 11.41 16 10 22 16 16 22 14.59 20.59" />
@@ -36,9 +36,11 @@
 
                                     Login
                                 </a>
+
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Accounts" asp-action="Register">
+
+                                <a class="btn btn-primary nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Accounts" asp-action="Register">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="-2 -2 24 24">
                                         <path d='M3.534 10.07a1 1 0 1 1 .733 1.86A3.579 3.579 0 0 0 2 15.26V17a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1.647a3.658 3.658 0 0 0-2.356-3.419 1 1 0 1 1 .712-1.868A5.658 5.658 0 0 1 14 15.353V17a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3v-1.74a5.579 5.579 0 0 1 3.534-5.19zM7 0a4 4 0 0 1 4 4v2a4 4 0 1 1-8 0V4a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2a2 2 0 1 0 4 0V4a2 2 0 0 0-2-2zm10 3h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0V7h-2a1 1 0 0 1 0-2h2V3a1 1 0 0 1 2 0v2z' />
                                     </svg>
@@ -85,8 +87,27 @@
                                 </a>
 
                             </li>
-
                         }
+
+                            @if(User.IsInRole("Admin"))
+                            {
+                                        
+
+
+
+                                <li class="nav-item ">
+                                    <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Admin" asp-action="UserManaging">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 19H1V18C1 16.1362 2.27477 14.5701 4 14.126M6 10.8293C4.83481 10.4175 4 9.30621 4 7.99999C4 6.69378 4.83481 5.58254 6 5.1707M21 19H23V18C23 16.1362 21.7252 14.5701 20 14.126M18 5.1707C19.1652 5.58254 20 6.69378 20 7.99999C20 9.30621 19.1652 10.4175 18 10.8293M10 14H14C16.2091 14 18 15.7909 18 18V19H6V18C6 15.7909 7.79086 14 10 14ZM15 8C15 9.65685 13.6569 11 12 11C10.3431 11 9 9.65685 9 8C9 6.34315 10.3431 5 12 5C13.6569 5 15 6.34315 15 8Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                        Manage Users
+                                    </a>
+
+                                </li>
+
+                            }
+
+                        
 
                     </ul>
 
@@ -277,6 +298,5 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
 
 
