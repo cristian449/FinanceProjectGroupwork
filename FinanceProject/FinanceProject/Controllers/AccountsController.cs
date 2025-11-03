@@ -33,40 +33,6 @@ namespace FinanceProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Password != model.Confirmpassword)
-                {
-                    if (model.Password != model.Confirmpassword)
-                    {
-                        ModelState.AddModelError("Confirmpassword", "Passwords do not match.");
-                        return View(model);
-                    }
-
-                var user = new User 
-                { 
-                    UserName = model.Email, 
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    PhoneNumber = model.PhoneNumber,
-                    DateOfBirth = model.DateOfBirth,
-                };
-                    var result = await _userManager.CreateAsync(user, model.Password);
-
-                    if (result.Succeeded)
-                    {
-
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-
-                        return RedirectToAction("Dashboard", "User");
-
-                    }
-
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-
-                }
 
                 var user = new User
                 {
@@ -76,6 +42,7 @@ namespace FinanceProject.Controllers
                     CreatedAt = DateTime.UtcNow,
                     UserName = model.Email,
                     Email = model.Email,
+                    DateOfBirth = model.DateOfBirth,
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -175,7 +142,7 @@ namespace FinanceProject.Controllers
                     await _userManager.UpdateAsync(user);
 
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "User");
                 }
 
                 ModelState.AddModelError("Password", "Invalid password.");

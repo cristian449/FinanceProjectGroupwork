@@ -28,6 +28,6 @@ namespace FinanceProject.Models
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
     }
 }
