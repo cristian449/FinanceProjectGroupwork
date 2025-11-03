@@ -110,46 +110,52 @@ namespace FinanceProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewmodel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-
-                if (user == null)
-                {
-                    ModelState.AddModelError("Email", "User not found.");
-                    return View(model);
-                }
-
-                if (!await _userManager.IsEmailConfirmedAsync(user))
-                {
-                    ModelState.AddModelError("Email", "Please verify your email before logging in.");
-                    return View(model);
-                }
-
-                //To make admin key work again, emails screwed over i think, might need to change this later
-                var result = await _signInManager.PasswordSignInAsync(
-                    model.Email,
-                    model.Password,
-                    model.RememberMe,
-                    lockoutOnFailure: false
-                );
-
-                if (result.Succeeded)
-                {
-                    //Makes the user active when loggin in
-                    user.IsActive = true;
-                    user.LastActive = DateTime.UtcNow;
-                    await _userManager.UpdateAsync(user);
-
-
-                    return RedirectToAction("Dashboard", "User");
-                }
-
-                ModelState.AddModelError("Password", "Invalid password.");
+                ModelState.AddModelError("Email", "User not found.");
+                return View(model);
             }
 
-            return View(model);
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError("Email", "Please verify your email before logging in.");
+                return View(model);
+            }
+
+            var passwordValid = await _userManager.CheckPasswordAsync(user, model.Password);
+            if (!passwordValid)
+            {
+                ModelState.AddModelError("Password", "Invalid password.");
+                return View(model);
+            }
+
+     
+            if (await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                var adminClaim = (await _userManager.GetClaimsAsync(user))
+                    .FirstOrDefault(c => c.Type == "AdminKey");
+
+                if (adminClaim == null || string.IsNullOrWhiteSpace(model.AdminKey) || adminClaim.Value != model.AdminKey)
+                {
+                    ModelState.AddModelError("AdminKey", "Invalid or missing Admin Key.");
+                    return View(model);
+                }
+            }
+
+            await _signInManager.SignInAsync(user, isPersistent: model.RememberMe);
+
+     
+            user.IsActive = true;
+            user.LastActive = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction("Dashboard", "User");
         }
+
 
         public async Task<IActionResult> Logout()
         {

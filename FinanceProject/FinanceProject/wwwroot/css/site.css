@@ -107,7 +107,7 @@ footer[class='border-top footer text-muted'] {
     bottom: 0px;
     top: 62px;
     width: 70px;
-    background-color: black;
+    background-color: #206FC7;
     color: white;
     transition: width 0.25s ease;
     overflow: hidden;
