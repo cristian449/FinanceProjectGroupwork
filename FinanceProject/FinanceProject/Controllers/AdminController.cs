@@ -59,8 +59,6 @@ namespace FinanceProject.Controllers
 
 
 
-        //Currently seems that when making a user into an Admin, the new Admin does not need the AdminKey
-        // to access Admin features. This may need to be changed in the future.
 
         [HttpPost]
         public async Task<IActionResult> ChangeRole(Guid id)
