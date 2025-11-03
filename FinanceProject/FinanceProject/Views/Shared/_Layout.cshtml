@@ -14,7 +14,7 @@
             <div class="container-fluid">
                 <a style="color: azure;" class="navbar-brand" asp-area="" asp-controller="User" asp-action="Dashboard">
                     <img src="~/lib/cubert/fml.png" width="30" height="30" /> @* For this might afte to use if statement so that it sends to the dashboard when logged in and to the index page when not *@
-                    Lazysausage Finances
+                    LazySausages Finances
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
                                         <polygon points="14.59 20.59 18.17 17 4 17 4 15 18.17 15 14.59 11.41 16 10 22 16 16 22 14.59 20.59" />
                                     </svg>
 
-                                    Login
+                                    Log in
                                 </a>
 
                             </li>
@@ -80,15 +80,15 @@
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <li>
-                                            <a class="form-inline" asp-controller="Admin" asp-action="UserManaging">
+                                            <form method="get" class="form-inline" asp-controller="Admin" asp-action="UserManaging">
                                                 <button type="submit" class="dropdown-item text-dark">Manage Users</button>
-                                            </a>
+                                            </form>
                                             <hr class="dropdown-divider">
                                         </li>
                                     }
                                     <li>
-                                        <form class="form-inline" asp-controller="Accounts" asp-action="Logout">
-                                            <button type="submit" class="dropdown-item oodangerous">Logout</button>
+										<form method="get" class="form-inline" asp-controller="Accounts" asp-action="Logout">
+                                            <button type="submit" class="dropdown-item oodangerous">Log out</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -200,7 +200,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span>Logout</span>
+                                <span>Log out</span>
                             </button>
                         </form>
                     </li>

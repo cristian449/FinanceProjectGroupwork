@@ -28,23 +28,24 @@ namespace FinanceProject.Controllers
                 _ => users
             };
             ViewBag.SortBy = sortBy;
-
+            if (!User.IsInRole("Admin"))
+            {
+                return NotFound();
+            }
             return View(users);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> UserDetails(Guid id)
         {
             var user = _userManager.Users.FirstOrDefault(i => i.Id == id);
-            if (user == null)
+            if (user == null || !User.IsInRole("Admin"))
             {
                 return NotFound();
             }
             return View(user);
 
         }
-
 
         [HttpPost]
         public async Task<IActionResult> DeleteUser(Guid id)
@@ -57,9 +58,6 @@ namespace FinanceProject.Controllers
             return RedirectToAction("UserManaging");
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> ChangeRole(Guid id)
         {
@@ -70,11 +68,7 @@ namespace FinanceProject.Controllers
                 await _userManager.RemoveFromRolesAsync(user, currentRoles);
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
-            
             return RedirectToAction("UserManaging");
         }
-
-
-
     }
 }
