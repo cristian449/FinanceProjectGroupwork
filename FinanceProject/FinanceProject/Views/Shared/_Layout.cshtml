@@ -12,9 +12,9 @@
     <header style="background-color: #164d8f; color: azure;">@* navbar-light *@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm   border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a style="color: azure;" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/lib/cubert/fml.png" width="30" height="30" />
-                    Sosig
+                <a style="color: azure;" class="navbar-brand" asp-area="" asp-controller="User" asp-action="Dashboard">
+                    <img src="~/lib/cubert/fml.png" width="30" height="30" /> @* For this might afte to use if statement so that it sends to the dashboard when logged in and to the index page when not *@
+                    Lazysausage Finances
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -55,62 +55,6 @@
                         }
 
 
-                        @if (User.Identity.IsAuthenticated)
-
-                        {
-
-
-
-                            <li class="nav-item ">
-                                <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Invoices" asp-action="Index">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="-2 -2 461 461">
-                                        <path d="M218.747,220.134c0-4.142-3.358-7.5-7.5-7.5c-4.142,0-7.5,3.358-7.5,7.5c0,20.194,14.584,37.035,33.77,40.574v8.842
-				                                            c0,4.142,3.358,7.5,7.5,7.5c4.142,0,7.5-3.358,7.5-7.5v-8.842c19.186-3.539,33.77-20.38,33.77-40.574
-				                                            c0-20.194-14.583-37.035-33.77-40.574v-52.138c10.841,3.236,18.77,13.294,18.77,25.173c0,4.142,3.358,7.5,7.5,7.5
-				                                            c4.142,0,7.5-3.358,7.5-7.5c0-20.194-14.583-37.036-33.77-40.574v-8.842c0-4.142-3.358-7.5-7.5-7.5c-4.142,0-7.5,3.358-7.5,7.5
-				                                            v8.842c-19.186,3.539-33.77,20.38-33.77,40.574c0,20.194,14.584,37.036,33.77,40.574v52.138
-				                                            C226.675,242.071,218.747,232.013,218.747,220.134z M252.517,194.962c10.841,3.236,18.77,13.293,18.77,25.173
-				                                            c0,11.879-7.928,21.937-18.77,25.173V194.962z M218.747,152.595c0-11.879,7.928-21.936,18.77-25.173v50.346
-				                                                C226.675,174.532,218.747,164.474,218.747,152.595z" />
-
-                                        <path d="M337.333,401.609c2.083-2.144,2.795-5.387,1.62-8.17c-0.385-0.913-0.929-1.729-1.62-2.44
-
-				                                                c-4.657-4.524-12.828-1.315-12.81,5.31C324.541,402.907,332.65,406.158,337.333,401.609z" />
-                                        <path d="M371.5,0H118.533C98.389,0,82,16.389,82,36.533v359.758c0,0.006,0,0.013,0,0.019c0,9.748,3.797,18.921,10.702,25.838
-				                                            c6.908,6.895,16.081,10.692,25.829,10.692H132.5v20.66c0,2.841,1.605,5.438,4.146,6.708c2.542,1.271,5.583,0.996,7.854-0.708
-				                                            l19.5-14.625l19.5,14.625c1.323,0.993,2.907,1.5,4.501,1.5c1.143,0,2.292-0.261,3.353-0.792c2.541-1.271,4.146-3.867,4.146-6.708
-				                                            v-20.66h176c4.142,0,7.5-3.358,7.5-7.5V7.5C379,3.358,375.642,0,371.5,0z M97,36.533c0-9.233,5.853-17.104,14.033-20.158v344.173
-				                                            c-5.16,1.081-9.92,3.257-14.033,6.269V36.533z M180.499,438.5l-12-9c-2.667-2-6.333-2-9,0l-12,9v-34.695h33V438.5z M364,388.81
-				                                            h-8.27c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5H364v14.03H195.499v-14.035H307.53c4.142,0,7.5-3.358,7.5-7.5
-				                                            c0-4.142-3.358-7.5-7.5-7.5h-189c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h13.969v14.035H118.53
-				                                            c-5.747,0-11.156-2.24-15.222-6.298C99.24,407.466,97,402.057,97,396.31c0-11.877,9.658-21.54,21.53-21.54H364V388.81z
-				                                             M364,359.77H126.033V15H364V359.77z" />
-                                    </svg>
-                                    Invoices
-                                </a>
-
-                            </li>
-                        }
-
-                            @if(User.IsInRole("Admin"))
-                            {
-                                        
-
-
-
-                                <li class="nav-item ">
-                                    <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Admin" asp-action="UserManaging">
-                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3 19H1V18C1 16.1362 2.27477 14.5701 4 14.126M6 10.8293C4.83481 10.4175 4 9.30621 4 7.99999C4 6.69378 4.83481 5.58254 6 5.1707M21 19H23V18C23 16.1362 21.7252 14.5701 20 14.126M18 5.1707C19.1652 5.58254 20 6.69378 20 7.99999C20 9.30621 19.1652 10.4175 18 10.8293M10 14H14C16.2091 14 18 15.7909 18 18V19H6V18C6 15.7909 7.79086 14 10 14ZM15 8C15 9.65685 13.6569 11 12 11C10.3431 11 9 9.65685 9 8C9 6.34315 10.3431 5 12 5C13.6569 5 15 6.34315 15 8Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                        Manage Users
-                                    </a>
-
-                                </li>
-
-                            }
-
-                        
 
                     </ul>
 
@@ -122,12 +66,12 @@
                                     <i class="fas fa-user-circle me-1"></i> @User.Identity.Name
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <li>
-                                            <form class="form-inline" asp-controller="User" asp-action="Dashboard">
-                                                <button type="submit" class="dropdown-item text-dark">Dashboard</button>
-                                            </form>
-                                            <hr class="dropdown-divider">
-                                        </li>
+                                    <li>
+                                        <form class="form-inline" asp-controller="User" asp-action="Dashboard">
+                                            <button type="submit" class="dropdown-item text-dark">Dashboard</button>
+                                        </form>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <li>
                                         <form class="form-inline" asp-controller="Invoices" asp-action="Index">
                                             <button type="submit" class="dropdown-item text-dark">Invoices</button>
@@ -154,6 +98,15 @@
         {
             <nav id="sideNav">
                 <ul>
+                    <li>
+                        <a asp-controller="User" asp-action="Dashboard">
+                            <svg width="30px" height="30px" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z" fill="white" />
+                                <path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z" fill="white" />
+                            </svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
                     <li>
                         <a asp-controller="Invoices" asp-action="Index">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="-2 -2 461 461">
@@ -182,16 +135,25 @@
                             <span>Invoices</span>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="Dashboard" asp-action="Index">
-                            <img src="" alt=""><span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-controller="Home" asp-action="About">
-                            <img src="" alt=""><span>About</span>
-                        </a>
-                    </li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+
+
+                        <li>
+                            <a asp-controller="Admin" asp-action="UserManaging">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 19H1V18C1 16.1362 2.27477 14.5701 4 14.126M6 10.8293C4.83481 10.4175 4 9.30621 4 7.99999C4 6.69378 4.83481 5.58254 6 5.1707M21 19H23V18C23 16.1362 21.7252 14.5701 20 14.126M18 5.1707C19.1652 5.58254 20 6.69378 20 7.99999C20 9.30621 19.1652 10.4175 18 10.8293M10 14H14C16.2091 14 18 15.7909 18 18V19H6V18C6 15.7909 7.79086 14 10 14ZM15 8C15 9.65685 13.6569 11 12 11C10.3431 11 9 9.65685 9 8C9 6.34315 10.3431 5 12 5C13.6569 5 15 6.34315 15 8Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <span>Manage Users</span>
+                            </a>
+                        </li>
+
+                    }
+
+
+
                     <li style="margin-top: auto; margin-bottom: 10px">
                         <form asp-controller="Accounts" asp-action="Logout" method="post">
                             <button type="submit" class="btn btn-link text-white p-0" style="text-decoration: none;">
