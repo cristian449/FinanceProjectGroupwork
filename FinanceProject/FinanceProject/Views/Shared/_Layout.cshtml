@@ -220,6 +220,7 @@
     </footer>
 
     <script>
+        console.log(parseFloat(getComputedStyle(topNav).height));
         window.addEventListener("load", (e) => {
 
             const sideNav = document.getElementById("sideNav");
@@ -252,7 +253,7 @@
 
             if (topHeight2 - scrollTop > 0)
             {
-                const cssSide = `${Math.round(topHeight2 - scrollTop)}px`
+                const cssSide = `${topHeight2 - scrollTop}px`
                 console.log(cssSide);
                 sideNav.style.top = cssSide;
             }
