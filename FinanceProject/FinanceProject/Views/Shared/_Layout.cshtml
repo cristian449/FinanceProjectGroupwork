@@ -114,18 +114,36 @@
             </div>
         </nav>
         @* Making left navbar separate *@
-        <nav id="sideNav">
-            <ul>
-                <li><a href="#"><img src=""><span>Invoices</span></a></li>
-                <li><a href="#"><img src=""><span>Dashboard</span></a></li>
-                <li><a href="#"><img src=""><span>BLABLABLA</span></a></li>
-                <li><a href="#"><img src=""><span>TEST TING</span></a></li>
-                @* Template for da links *@
-                @* <li><a href="#"><img src=""><span>TEST</span></a></li> *@
 
-                <li style="margin-top: auto; margin-bottom: 10px"><a href="#"><img src=""><span>Logout</span></a></li>
-            </ul>
-        </nav>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <nav id="sideNav">
+                <ul>
+                    <li>
+                        <a asp-controller="Invoices" asp-action="Index">
+                            <img src="" alt=""><span>Invoices</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Dashboard" asp-action="Index">
+                            <img src="" alt=""><span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="About">
+                            <img src="" alt=""><span>About</span>
+                        </a>
+                    </li>
+                    <li style="margin-top: auto; margin-bottom: 10px">
+                        <form asp-controller="Accounts" asp-action="Logout" method="post">
+                            <button type="submit" class="btn btn-link text-white p-0" style="text-decoration: none;">
+                                <img src="" alt=""><span>Logout</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        }
     </header>
     <div class="container">
         <main role="main" class="pb-3" style="margin-left: 70px;">
@@ -144,31 +162,56 @@
         window.addEventListener("load", (e) => {
 
             const sideNav = document.getElementById("sideNav");
+            const topNav = document.getElementById("topNav");
+            const bottomNav = document.getElementById("bottomNav");
+            const mainContent = document.getElementById("mainContent");
 
-            function ResizeSideNavTop()
-            {
+            // 🧩 Function to resize sideNav top position dynamically
+            function ResizeSideNavTop() {
+                if (!sideNav || !topNav) return; // prevent errors if not logged in
                 const topHeight = getComputedStyle(topNav).height;
                 sideNav.style.top = topHeight;
-                console.log("New top: " + getComputedStyle(topNav).height);
+                console.log("New top:", topHeight);
             }
 
-            // function ResizeSideNavBottom()
-            // {
+            // 🧩 Optional: Function to align sideNav bottom with footer height
+            // function ResizeSideNavBottom() {
+            //     if (!sideNav || !bottomNav) return;
             //     const bottomHeight = getComputedStyle(bottomNav).height;
             //     sideNav.style.bottom = bottomHeight;
-            //     console.log("New bottom: " + getComputedStyle(bottomNav).height);
+            //     console.log("New bottom:", bottomHeight);
             // }
 
-            ResizeSideNavTop()
-            // ResizeSideNavBottom()
+            // 🔧 Initial setup
+            ResizeSideNavTop();
+            // ResizeSideNavBottom();
 
-            const resizeObserverTop = new ResizeObserver(entries => ResizeSideNavTop());
-            // const resizeObserverBottom = new ResizeObserver(entries => ResizeSideNavBottom());
+            // 🪄 Resize observers to auto-adjust on navbar/footer resize
+            if (topNav) {
+                const resizeObserverTop = new ResizeObserver(() => ResizeSideNavTop());
+                resizeObserverTop.observe(topNav);
+            }
 
-            resizeObserverTop.observe(document.getElementById("topNav"))
-            // resizeObserverBottom.observe(document.getElementById("bottomNav"))
+            // if (bottomNav) {
+            //     const resizeObserverBottom = new ResizeObserver(() => ResizeSideNavBottom());
+            //     resizeObserverBottom.observe(bottomNav);
+            // }
+
+            // 🎨 Optional UX: Expand/collapse main content margin on hover
+            if (sideNav && mainContent) {
+                sideNav.addEventListener("mouseenter", () => {
+                    mainContent.style.marginLeft = "200px";
+                });
+
+                sideNav.addEventListener("mouseleave", () => {
+                    mainContent.style.marginLeft = "70px";
+                });
+            }
+
+            console.log("Sidebar initialization complete ✅");
         });
     </script>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
