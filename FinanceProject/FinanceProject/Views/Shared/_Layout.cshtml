@@ -81,9 +81,9 @@
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <li>
-                                            <form class="form-inline" asp-controller="Admin" asp-action="UserManaging">
+                                            <a class="form-inline" asp-controller="Admin" asp-action="UserManaging">
                                                 <button type="submit" class="dropdown-item text-dark">Manage Users</button>
-                                            </form>
+                                            </a>
                                             <hr class="dropdown-divider">
                                         </li>
                                     }

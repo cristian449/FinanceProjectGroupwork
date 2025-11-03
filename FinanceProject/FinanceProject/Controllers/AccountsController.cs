@@ -114,7 +114,6 @@ namespace FinanceProject.Controllers
                 return View(model);
 
             var user = await _userManager.FindByEmailAsync(model.Email);
-
             if (user == null)
             {
                 ModelState.AddModelError("Email", "User not found.");
@@ -127,14 +126,14 @@ namespace FinanceProject.Controllers
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
-
-            if (!result.Succeeded)
+            var passwordValid = await _userManager.CheckPasswordAsync(user, model.Password);
+            if (!passwordValid)
             {
                 ModelState.AddModelError("Password", "Invalid password.");
                 return View(model);
             }
 
+     
             if (await _userManager.IsInRoleAsync(user, "Admin"))
             {
                 var adminClaim = (await _userManager.GetClaimsAsync(user))
@@ -142,19 +141,21 @@ namespace FinanceProject.Controllers
 
                 if (adminClaim == null || string.IsNullOrWhiteSpace(model.AdminKey) || adminClaim.Value != model.AdminKey)
                 {
-                    await _signInManager.SignOutAsync();
                     ModelState.AddModelError("AdminKey", "Invalid or missing Admin Key.");
                     return View(model);
                 }
             }
 
+            await _signInManager.SignInAsync(user, isPersistent: model.RememberMe);
 
+     
             user.IsActive = true;
             user.LastActive = DateTime.UtcNow;
             await _userManager.UpdateAsync(user);
 
             return RedirectToAction("Dashboard", "User");
         }
+
 
         public async Task<IActionResult> Logout()
         {
