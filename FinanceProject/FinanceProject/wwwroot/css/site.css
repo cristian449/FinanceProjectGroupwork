@@ -105,13 +105,12 @@ footer[class='border-top footer text-muted'] {
     position: fixed;
     left: 0;
     bottom: 0px;
-    top: 60px;
+    top: 62px;
     width: 70px;
     background-color: black;
     color: white;
     transition: width 0.25s ease;
     overflow: hidden;
-    z-index: 999;
 }
 
 #sideNav:hover {

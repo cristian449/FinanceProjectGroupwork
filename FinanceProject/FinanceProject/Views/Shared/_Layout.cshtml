@@ -10,7 +10,7 @@
 </head>
 <body>@* bg-white *@
     <header style="background-color: #164d8f; color: azure;">@* navbar-light *@
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm   border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm" id="topNav" style="z-index: 10">
             <div class="container-fluid">
                 <a style="color: azure;" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/lib/cubert/fml.png" width="30" height="30" />
@@ -113,7 +113,6 @@
                         
 
                     </ul>
-
                     <ul class="navbar-nav">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -152,7 +151,7 @@
 
         @if (User.Identity.IsAuthenticated)
         {
-            <nav id="sideNav">
+            <nav id="sideNav" style="z-index: 9">
                 <ul>
                     <li>
                         <a asp-controller="Invoices" asp-action="Index">
@@ -250,13 +249,10 @@
     </footer>
 
     <script>
-        console.log("hi");
-
         window.addEventListener("load", (e) => {
 
             const sideNav = document.getElementById("sideNav");
             const topNav = document.getElementById("topNav");
-            const bottomNav = document.getElementById("bottomNav");
             const mainContent = document.getElementById("mainContent");
 
             // 🧩 Function to resize sideNav top position dynamically
@@ -267,41 +263,33 @@
                 console.log("New top:", topHeight);
             }
 
-            // 🧩 Optional: Function to align sideNav bottom with footer height
-            // function ResizeSideNavBottom() {
-            //     if (!sideNav || !bottomNav) return;
-            //     const bottomHeight = getComputedStyle(bottomNav).height;
-            //     sideNav.style.bottom = bottomHeight;
-            //     console.log("New bottom:", bottomHeight);
-            // }
-
             // 🔧 Initial setup
             ResizeSideNavTop();
-            // ResizeSideNavBottom();
 
             // 🪄 Resize observers to auto-adjust on navbar/footer resize
-            if (topNav) {
-                const resizeObserverTop = new ResizeObserver(() => ResizeSideNavTop());
-                resizeObserverTop.observe(topNav);
-            }
-
-            // if (bottomNav) {
-            //     const resizeObserverBottom = new ResizeObserver(() => ResizeSideNavBottom());
-            //     resizeObserverBottom.observe(bottomNav);
+            // if (topNav) {
+            //     const resizeObserverTop = new ResizeObserver(() => ResizeSideNavTop());
+            //     resizeObserverTop.observe(topNav);
             // }
 
-            // 🎨 Optional UX: Expand/collapse main content margin on hover
-            if (sideNav && mainContent) {
-                sideNav.addEventListener("mouseenter", () => {
-                    mainContent.style.marginLeft = "200px";
-                });
-
-                sideNav.addEventListener("mouseleave", () => {
-                    mainContent.style.marginLeft = "70px";
-                });
-            }
-
             console.log("Sidebar initialization complete ✅");
+        });
+
+        window.addEventListener("scroll", (e) => {
+            var scrollTop = parseFloat(window.scrollY);
+            const topHeight2 = parseFloat(getComputedStyle(topNav).height);
+
+            if (topHeight2 - scrollTop > 0)
+            {
+                const cssSide = `${Math.round(topHeight2 - scrollTop)}px`
+                console.log(cssSide);
+                sideNav.style.top = cssSide;
+            }
+            else
+            {
+                sideNav.style.top = 0;
+                console.log("0 CHANGE");
+            }
         });
     </script>
 
@@ -312,5 +300,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-
