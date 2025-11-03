@@ -20,13 +20,13 @@ namespace FinanceProject.Controllers
             _signInManager = signInManager;
         }
 
-        [Authorize]
+        
         public async Task<IActionResult> Dashboard()
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
 
             var model = new User
