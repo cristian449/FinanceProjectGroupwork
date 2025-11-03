@@ -43,6 +43,9 @@ namespace FinanceProject.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     DateOfBirth = model.DateOfBirth,
+
+
+
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
