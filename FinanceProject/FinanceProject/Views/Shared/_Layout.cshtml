@@ -3,16 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FinanceProject</title>
+    <title>@ViewData["Title"] - Finance Project</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinanceProject.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" id="topNav">
+<body>@* bg-white *@
+    <header style="background-color: #164d8f; color: azure;">@* navbar-light *@
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm   border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FinancesddsfProject</a>
+                <a style="color: azure;" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/lib/cubert/fml.png" width="30" height="30" />
+                    Sosig
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -119,10 +122,21 @@
                                     <i class="fas fa-user-circle me-1"></i> @User.Identity.Name
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form class="form-inline" asp-controller="User" asp-action="Dashboard">
+                                                <button type="submit" class="dropdown-item text-dark">Dashboard</button>
+                                            </form>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                    <li>
+                                        <form class="form-inline" asp-controller="Invoices" asp-action="Index">
+                                            <button type="submit" class="dropdown-item text-dark">Invoices</button>
+                                        </form>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <li>
                                         <form class="form-inline" asp-controller="Accounts" asp-action="Logout">
-                                            <button type="submit" class="dropdown-item">Logout</button>
+                                            <button type="submit" class="dropdown-item oodangerous">Logout</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -231,7 +245,7 @@
     </div>
     <footer class="border-top footer text-muted" id="bottomNav">
         <div class="container">
-            &copy; 2025 - FinanceProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Finance Project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 

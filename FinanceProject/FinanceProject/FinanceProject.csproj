@@ -27,4 +27,9 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.16" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\cubert\finn.png" />
+    <None Include="wwwroot\lib\cubert\fml.png" />
+  </ItemGroup>
+
 </Project>

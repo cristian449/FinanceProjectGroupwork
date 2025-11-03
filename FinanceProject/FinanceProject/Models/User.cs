@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace FinanceProject.Models
@@ -27,7 +28,6 @@ namespace FinanceProject.Models
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
 
-
-
+        public DateTime DateOfBirth { get; set; }
     }
 }

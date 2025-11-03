@@ -13,13 +13,25 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: Garamond;
 }
+
+/*dw bout it*/
+.adminge {
+    background-color: red;
+    color: azure;
+}
+
+footer[class='border-top footer text-muted'] {
+    color: azure;
+}
+
 
 .collapseButton {
     height: 20px;

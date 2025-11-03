@@ -35,8 +35,37 @@ namespace FinanceProject.Controllers
             {
                 if (model.Password != model.Confirmpassword)
                 {
-                    ModelState.AddModelError("Confirmpassword", "Passwords do not match.");
-                    return View(model);
+                    if (model.Password != model.Confirmpassword)
+                    {
+                        ModelState.AddModelError("Confirmpassword", "Passwords do not match.");
+                        return View(model);
+                    }
+
+                var user = new User 
+                { 
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                    DateOfBirth = model.DateOfBirth,
+                };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+
+                        return RedirectToAction("Dashboard", "User");
+
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+
                 }
 
                 var user = new User

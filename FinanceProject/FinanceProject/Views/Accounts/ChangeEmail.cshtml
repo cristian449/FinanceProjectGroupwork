@@ -1,0 +1,23 @@
+﻿@model ChangeEmailViewModel
+
+<h2>Change Email</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NewEmail"></label>
+                <input asp-for="NewEmail" class="form-control" />
+                <span asp-validation-for="NewEmail" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Make the change &amp; log out
+            </button>
+        </form><br />
+        <form>
+            <button asp-action="Dashboard" type="submit" class="btn btn-primary">Dashboard</button>
+        </form>
+    </div>
+</div>
