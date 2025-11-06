@@ -27,9 +27,11 @@ namespace FinanceProject.Data
                 context.Invoices.AddRange(invoices);
                 await context.SaveChangesAsync();
             }
-            var AdminFirstName = "CALAMARIA";
-            var AdminLastName = "OOGABOOGA";
+            var AdminFirstName = "Admin";
+            var AdminLastName = "Testmin";
             var AdminCreate = DateTime.Now;
+            var AdminBirth = new DateTime(1990, 1, 1);
+            var AdminPhone = "1234567890";
             var adminEmail = "TestAdmin@gmail.com";
             var adminKey = "Admin";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
@@ -39,6 +41,8 @@ namespace FinanceProject.Data
                 {
                     FirstName = AdminFirstName,
                     LastName = AdminLastName,
+                    DateOfBirth = AdminBirth,
+                    PhoneNumber = AdminPhone,
                     CreatedAt = AdminCreate,
                     UserName = adminEmail,
                     Email = adminEmail,
