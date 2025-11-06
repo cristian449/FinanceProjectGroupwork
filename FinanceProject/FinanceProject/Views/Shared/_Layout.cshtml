@@ -221,47 +221,44 @@
 
     <script>
         console.log(parseFloat(getComputedStyle(topNav).height));
-        window.addEventListener("load", (e) => {
-
+        window.addEventListener("load", () => {
             const sideNav = document.getElementById("sideNav");
             const topNav = document.getElementById("topNav");
-            const mainContent = document.getElementById("mainContent");
 
-            // 🧩 Function to resize sideNav top position dynamically
             function ResizeSideNavTop() {
-                if (!sideNav || !topNav) return; // prevent errors if not logged in
+                if (!sideNav || !topNav) return;
                 const topHeight = getComputedStyle(topNav).height;
                 sideNav.style.top = topHeight;
-                console.log("New top:", topHeight);
             }
 
-            // 🔧 Initial setup
-            ResizeSideNavTop();
+            
+
 
             // 🪄 Resize observers to auto-adjust on navbar/footer resize
             // if (topNav) {
             //     const resizeObserverTop = new ResizeObserver(() => ResizeSideNavTop());
             //     resizeObserverTop.observe(topNav);
             // }
+        
+
+         ResizeSideNavTop();
+
+
+            window.addEventListener("scroll", () => {
+                if (!sideNav || !topNav) return;
+
+                const scrollTop = parseFloat(window.scrollY);
+                const topHeight2 = parseFloat(getComputedStyle(topNav).height);
+
+                if (topHeight2 - scrollTop > 0) {
+                    const cssSide = `${topHeight2 - scrollTop}px`;
+                    sideNav.style.top = cssSide;
+                } else {
+                    sideNav.style.top = "0px";
+                }
+            });
 
             console.log("Sidebar initialization complete ✅");
-        });
-
-        window.addEventListener("scroll", (e) => {
-            var scrollTop = parseFloat(window.scrollY);
-            const topHeight2 = parseFloat(getComputedStyle(topNav).height);
-
-            if (topHeight2 - scrollTop > 0)
-            {
-                const cssSide = `${topHeight2 - scrollTop}px`
-                console.log(cssSide);
-                sideNav.style.top = cssSide;
-            }
-            else
-            {
-                sideNav.style.top = 0;
-                console.log("0 CHANGE");
-            }
         });
     </script>
 
