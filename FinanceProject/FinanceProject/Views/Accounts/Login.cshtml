@@ -16,7 +16,7 @@
 
             <div class="form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" placeholder="Enter your email here" />
+                <input id="emailLogIn" asp-for="Email" class="form-control" placeholder="Enter your email here" />
                 <span asp-validation-for="Email" class="text-danger"></span>
                 
             </div>
@@ -61,7 +61,7 @@
 
         <Form>
 
-            <button asp-action="Back" type="submit" class="btn btn-primary mt-2">Return</button>
+            <button asp-action="Back" id="returnButton" type="submit" class="btn btn-primary mt-2">Return</button>
             
         </Form>
     </div>

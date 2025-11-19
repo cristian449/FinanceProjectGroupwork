@@ -12,7 +12,7 @@
     <header style="background-color: #164d8f; color: azure;">@* navbar-light *@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm" id="topNav" style="z-index: 10">
             <div class="container-fluid">
-                <a style="color: azure;" class="navbar-brand" asp-area="" asp-controller="User" asp-action="Dashboard">
+                <a style="color: azure;" id="homeButtonHeader" class="navbar-brand" asp-area="" asp-controller="User" asp-action="Dashboard">
                     <img src="~/lib/cubert/fml.png" width="30" height="30" /> @* For this might afte to use if statement so that it sends to the dashboard when logged in and to the index page when not *@
                     LazySausages Finances
                 </a>
@@ -31,7 +31,7 @@
 
 
                             <li class="nav-item me-2">
-                                <a class="btn btn-primary nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Accounts" asp-action="Login">
+                                <a class="btn btn-primary nav-link text-dark d-flex align-items-center" id="logInHeader" asp-area="" asp-controller="Accounts" asp-action="Login">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 30 30">
                                         <path d="M26,30H14a2,2,0,0,1-2-2V25h2v3H26V4H14V7H12V4a2,2,0,0,1,2-2H26a2,2,0,0,1,2,2V28A2,2,0,0,1,26,30Z" />
                                         <polygon points="14.59 20.59 18.17 17 4 17 4 15 18.17 15 14.59 11.41 16 10 22 16 16 22 14.59 20.59" />
