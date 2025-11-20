@@ -7,7 +7,7 @@
     <h1 class="display-4">Invoices</h1> <br>
 
     <div>
-        <a asp-action="Create">✎ Add new invoice</a>
+        <a asp-action="Create" id="addinvoicebtn">✎ Add new invoice</a>
     </div>
 </div>
 
@@ -74,7 +74,7 @@
                         @Html.DisplayFor(i => item.InvoiceDate)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.InvoiceID">More Details</a>
+                        <a asp-action="Details" asp-route-id="@item.InvoiceID" id="detailsbtn">More Details</a>
                     </td>
                 </tr>
             }

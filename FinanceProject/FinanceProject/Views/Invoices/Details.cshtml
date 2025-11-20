@@ -10,7 +10,7 @@
     <div class="invoiceDetailsHolder">
         <div class="invoiceDetailHolder">
             <label>@Html.DisplayNameFor(Model => Model.Header):</label>
-            <a asp-action="Edit" asp-route-id="@Model.InvoiceID" style="float: right">✍ Edit</a><br>
+            <a asp-action="Edit" asp-route-id="@Model.InvoiceID" id="editbtn" style="float: right">✍ Edit</a><br>
             <textarea disabled class="invoiceDetailValue" rows="1" cols="50">@Html.DisplayFor(Model => Model.Header)</textarea>
         </div>
 
@@ -40,6 +40,6 @@
             <label>@Html.DisplayNameFor(Model => Model.InvoiceDate):</label><br>
             <textarea disabled class="invoiceDetailValue" rows="1">@Html.DisplayFor(Model => Model.InvoiceDate)</textarea>
         </div>
-        <div><a asp-action="Delete" asp-route-id="@Model.InvoiceID" id="deleteButton">Delete</a></div>
+        <div><a asp-action="Delete" asp-route-id="@Model.InvoiceID" id="detailsdeletebtn">Delete</a></div>
     </div>
 </div>

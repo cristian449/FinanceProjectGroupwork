@@ -27,6 +27,18 @@ namespace FinanceProject.Data
                 context.Invoices.AddRange(invoices);
                 await context.SaveChangesAsync();
             }
+
+            if (!context.Users.Any())
+            {
+                var users = new User[]
+                {
+                    new User {FirstName="Pancakey", LastName="Oomba", PhoneNumber="12451211", Email="Caagasa@gmail.com" },
+                    new User {FirstName="Lanky", LastName="Wanky", PhoneNumber="12345678", Email="lankywanky@gmail.com" }
+                };
+                context.Users.AddRange(users);
+                await context.SaveChangesAsync();
+            }
+
             var AdminFirstName = "Admin";
             var AdminLastName = "Testmin";
             var AdminCreate = DateTime.Now;

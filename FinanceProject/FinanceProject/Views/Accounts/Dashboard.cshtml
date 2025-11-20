@@ -28,7 +28,7 @@
 </div>
 <div>
     <h4><b>Email</b></h4>
-    <button class="accordion">Click for email</button>
+    <button class="accordion" id="showemailbtn">Click for email</button>
 	<div class="panel">
 		<p>@Model.Email</p>
 	</div>
@@ -37,7 +37,7 @@
 { *@
     <div>
         <h4><b>Phone number</b></h4>
-                    <button class="accordion">Click for phone number</button>
+                    <button class="accordion" id="showphonebtn">Click for phone number</button>
         <div class="panel">
             <p>@(Model.PhoneNumber ?? "N/A")</p>
         </div>
@@ -46,7 +46,7 @@
     <hr />
         <div>
             <form asp-controller="User" asp-action="ChangePassword">
-                <button type="submit" class="action-btn btn btn-primary">Change Password</button>
+                <button type="submit" class="action-btn btn btn-primary" id="changepasswordbtn">Change Password</button>
             </form>
         </div><br />
 

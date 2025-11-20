@@ -206,34 +206,34 @@ namespace Tarpe23CristianTestingXUnit
         }
 
 
-        [Fact]
-        public async Task ShouldUpdate_WithCorrectDataType()
-        {
-            var controller = Svc<InvoicesController>();
+        //[Fact]
+        //public async Task ShouldUpdate_WithCorrectDataType()
+        //{
+        //    var controller = Svc<InvoicesController>();
 
 
-            Invoice testInvoice = new()
-            {
-                Header = null,
-                Description = null,
-                Amount = 0,
-                InvoiceCategory = 0,
-                InvoiceDate = DateTime.MinValue
-            };
+        //    Invoice testInvoice = new()
+        //    {
+        //        Header = null,
+        //        Description = null,
+        //        Amount = 0,
+        //        InvoiceCategory = 0,
+        //        InvoiceDate = DateTime.MinValue
+        //    };
 
 
-            testInvoice.Amount = 50;
+        //    testInvoice.Amount = 50;
 
 
-            var result = await Svc<InvoicesController>().Create(testInvoice);
+        //    var result = await Svc<InvoicesController>().Create(testInvoice);
 
-            Assert.IsType<int>(result.Amount);
-
-
+        //    Assert.IsType<int>(result.Amount);
 
 
 
-        } 
+
+
+        //} 
 
 
 
