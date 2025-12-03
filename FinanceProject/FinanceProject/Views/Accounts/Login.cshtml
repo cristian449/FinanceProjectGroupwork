@@ -23,7 +23,7 @@
 
             <div class="form-group">
                 <label asp-for="Password"></label>
-                <input asp-for="Password" type="password" class="form-control"  placeholder="Enter your password" />
+                <input id="passwordLogIn" asp-for="Password" type="password" class="form-control"  placeholder="Enter your password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
 
             </div>
@@ -47,7 +47,7 @@
 
 
 
-            <button type="submit" class="btn btn-primary">Log in</button>
+            <button id="logInForReal" type="submit" class="btn btn-primary">Log in</button>
 
             <a asp-area="" asp-controller="Accounts" asp-action="Register" class="navbar-text mt-3"> 
             If you have no account you can register right here
