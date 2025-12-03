@@ -1,4 +1,4 @@
-using FinanceProject.Controllers;
+﻿using FinanceProject.Controllers;
 using FinanceProject.Data;
 using FinanceProject.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +25,18 @@ namespace Tarpe23CristianTestingXUnit
 
             var result = await controller.Create(testInvoice);
 
+            //This makes sure we redirect back to index, making these tests complicated as i dont 
+            //Really have any other backend test to make as I dont have services nor do the Controllers have much logic
+            //Anyways once again this makes sure we redirect back to index
+            var redirect = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", redirect.ActionName);
 
-            Assert.NotNull(result);
-
+            // Checks if the invoice was actually added to the database
+            var saved = context.Invoices.FirstOrDefault(i => i.Header == "Test Invoice");
+            Assert.NotNull(saved);
+            Assert.Equal(100, saved.Amount);
         }
+
 
         [Fact]
         public async Task ShouldNot_GetByIdInvoice_WhenReturnIsNotEqual()
@@ -40,7 +48,6 @@ namespace Tarpe23CristianTestingXUnit
             var result = await controller.Details(wrongId);
 
             Assert.IsType<NotFoundResult>(result);
-
         }
 
         [Fact]
@@ -51,8 +58,8 @@ namespace Tarpe23CristianTestingXUnit
 
             Invoice testInvoice = new()
             {
-                Header = "Test Invoice",
-                Description = "Unit Test",
+                Header = "Test Invoice Delete",
+                Description = "Unit Test Delete",
                 Amount = 100,
                 InvoiceCategory = InvoiceCategories.Food,
                 InvoiceDate = DateTime.Now
@@ -60,7 +67,7 @@ namespace Tarpe23CristianTestingXUnit
 
             await controller.Create(testInvoice);
 
-            var savedInvoice = context.Invoices.First(i => i.Header == "Test Invoice");
+            var savedInvoice = context.Invoices.First(i => i.Header == "Test Invoice Delete");
             int invoiceId = savedInvoice.InvoiceID;
 
             var result = await controller.DeleteConfirmed(invoiceId);
@@ -71,13 +78,12 @@ namespace Tarpe23CristianTestingXUnit
             Assert.Null(deleted);
         }
 
+
         [Fact]
         public async Task Should_NotDelete_OtherInvoice_WhenDeletingSpecificInvoice()
         {
-
             var controller = Svc<InvoicesController>();
             var context = Svc<FinancesDbContext>();
-
 
             Invoice invoice1 = new()
             {
@@ -108,7 +114,6 @@ namespace Tarpe23CristianTestingXUnit
 
             await controller.DeleteConfirmed(id2);
 
-
             var stillExists = context.Invoices.FirstOrDefault(i => i.InvoiceID == id1);
             var deleted = context.Invoices.FirstOrDefault(i => i.InvoiceID == id2);
 
@@ -116,8 +121,69 @@ namespace Tarpe23CristianTestingXUnit
             Assert.Null(deleted);
         }
 
+        [Fact]
+        public async Task Should_ReturnInvoiceList_OnIndex()
+        {
+            var controller = Svc<InvoicesController>();
+            var context = Svc<FinancesDbContext>();
 
-        //No Clue how doing this one
+
+            context.Invoices.Add(new Invoice
+            {
+                Header = "Index Test Invoice",
+                Description = "Just for Index test, plz work",
+                Amount = 50,
+                InvoiceCategory = InvoiceCategories.MISC,
+                InvoiceDate = DateTime.Now
+            });
+            await context.SaveChangesAsync();
+
+            var result = await controller.Index();
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Invoice>>(viewResult.Model);
+
+            Assert.Contains(model, i => i.Header == "Index Test Invoice");
+        }
+
+
+        [Fact]
+        public async Task Should_ReturnDetailsView_WhenInvoiceExists()
+        {
+            var controller = Svc<InvoicesController>();
+            var context = Svc<FinancesDbContext>();
+
+            var inv = new Invoice
+            {
+                Header = "Details Invoice",
+                Description = "Details test",
+                Amount = 10,
+                InvoiceCategory = InvoiceCategories.Food,
+                InvoiceDate = DateTime.Now
+            };
+            context.Invoices.Add(inv);
+            await context.SaveChangesAsync();
+
+            var saved = context.Invoices.First(i => i.Header == "Details Invoice");
+
+            var result = await controller.Details(saved.InvoiceID);
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsType<Invoice>(viewResult.Model);
+
+            Assert.Equal(saved.InvoiceID, model.InvoiceID);
+            Assert.Equal("Details Invoice", model.Header);
+        }
+
+        //GPT link chat ling about how to bloody to Edit https://chatgpt.com/share/69307a26-e870-8013-bb7b-756b74760995
+
+
+        //No Clue how doing this one, I tried in vain for a while to get it to work
+        //However i Have concluded that it is impossible! Unless I remake the EditPost method completely
+        //However since i am not the one who made the controller nor made the methods I will not do it as that 
+        //Is not my job to change other peoples code
+        // I did find a way to do it however it is not clean, nor is it 100% a Unittest anymore more of an integration test
+        //Cause of that i have decided not to do it
 
         //[Fact]
         //public async Task Should_UpdateInvoice_OnUpdateMethodCall()
@@ -160,52 +226,66 @@ namespace Tarpe23CristianTestingXUnit
         //public async Task ShouldNot_UpdateInvoice_WhenDataNull()
 
 
-        //No idea if work
         [Fact]
-        public async Task Should_CreateInvoice_WhenAreaNegative()
+        public async Task Should_CreateInvoice_WhenAmountNegative()
         {
+            var controller = Svc<InvoicesController>();
+            var context = Svc<FinancesDbContext>();
+
             Invoice testInvoice = new Invoice
             {
+                Header = "Negative Amount Invoice",
                 Amount = -1241212111,
                 Description = "Negative Sum Test",
+                InvoiceCategory = InvoiceCategories.MISC,
+                InvoiceDate = DateTime.Now
             };
 
-            var result = await Svc<InvoicesController>().Create(testInvoice);
+            var result = await controller.Create(testInvoice);
             Assert.NotNull(result);
 
-            Assert.Equal(-1241212111, testInvoice.Amount);
-
+            var saved = context.Invoices.FirstOrDefault(i => i.Header == "Negative Amount Invoice");
+            Assert.NotNull(saved);
+            Assert.Equal(-1241212111, saved.Amount);
         }
 
 
 
-        //KILL ME PLZ, OH GOD WHY, IS THIS WHAT HELL FEELS LIKE, TRULY TORTUROUS EXISTENCE
-
 
         [Fact]
-        public async Task ShouldNotAdd_NullInvoice()
+        public async Task Should_Handle_NullFieldsANDNOTCRASH_OnCreate()
         {
             var controller = Svc<InvoicesController>();
+            var context = Svc<FinancesDbContext>();
 
             Invoice testInvoice = new()
             {
-                Header = null,
+                Header = null,         
                 Description = null,
                 Amount = 0,
                 InvoiceCategory = 0,
                 InvoiceDate = DateTime.MinValue
             };
 
+            var result = await controller.Create(testInvoice);
 
-            var result = await Svc<InvoicesController>().Create(testInvoice);
+  
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsType<Invoice>(viewResult.Model);
 
-            Assert.NotNull(result);
 
+            Assert.False(controller.ModelState.IsValid);
 
-
+            // Should NOT! save to database
+            var saved = context.Invoices.FirstOrDefault(i => i.Amount == 0);
+            Assert.Null(saved);
         }
 
 
+
+        //Same shite as i said in upper one about Edit, cant do update tests unless i remake the EditPost method or make it an integration test
+        //Then again I am able to make some scuff tests for Editpost however they wouldnt be testing the method exactly
+        //And so they would be kinda useless completely.
         //[Fact]
         //public async Task ShouldUpdate_WithCorrectDataType()
         //{
@@ -236,21 +316,49 @@ namespace Tarpe23CristianTestingXUnit
         //} 
 
 
+        //Next 2 tests are the only ones I could come up with that somewhat test EditPost method
+        //Very scuff tests but hey better than nothing
+        // I hate UnitTesting so much more than UserInterface module tesing, this pain tops CreateInvoice testing
 
-
-        //No idea if work
-        private static Invoice MockInvoice()
+        [Fact]
+        public async Task Should_ReturnView_OnEditPost_WhenNoDataProvided()
         {
-            return new()
-            {
-                Header = "Mock Invoice",
-                Description = "This is a mock invoice for testing.",
-                Amount = 150.75f,
-                InvoiceCategory = InvoiceCategories.MISC,
-                InvoiceDate = DateTime.Now
+            var controller = Svc<InvoicesController>();
+            var context = Svc<FinancesDbContext>();
 
-                //Create same thing as MockInvoice but make things null can call it MockNullInvoicew NO IDea though if stuff nullable to yayayaya
+            var inv = new Invoice
+            {
+                Header = "Pain Header",
+                Description = "Painful Desc",
+                Amount = 10,
+                InvoiceCategory = InvoiceCategories.Food,
+                InvoiceDate = DateTime.Now
             };
+
+            context.Invoices.Add(inv);
+            await context.SaveChangesAsync();
+
+            var savedBefore = context.Invoices.First(i => i.Header == "Pain Header");
+            int id = savedBefore.InvoiceID;
+
+            await Assert.ThrowsAsync<ArgumentNullException>(() => controller.EditPost(id));
+
+            var savedAfter = context.Invoices.First(i => i.InvoiceID == id);
+
+            Assert.Equal("Pain Header", savedAfter.Header);
+            Assert.Equal("Painful Desc", savedAfter.Description);
+            Assert.Equal(10, savedAfter.Amount);
+        }
+
+
+        [Fact]
+        public async Task Should_ReturnNotFound_OnEditPost_WhenIdNull()
+        {
+            var controller = Svc<InvoicesController>();
+
+            var result = await controller.EditPost(null);
+
+            Assert.IsType<NotFoundResult>(result);
         }
 
 
